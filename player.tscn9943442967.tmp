@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://drajm3wmsbnvv"]
+
+[ext_resource type="Texture2D" uid="uid://b3r62i7l186q7" path="res://icon.svg" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dmkca1guah5gk" path="res://player.gd" id="1_onrkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12t7q"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D" unique_id=1682648491]
+script = ExtResource("1_onrkg")
+acceleration = null
+ground_friction = null
+air_friction = null
+max_speed = null
+dash_speed = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1429769487]
+texture = ExtResource("1_4flbx")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1623786422]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2043962781]
+shape = SubResource("RectangleShape2D_12t7q")
+
+[node name="DashLabel" type="Label" parent="." unique_id=610582657]
+offset_left = 125.0
+offset_top = 303.0
+offset_right = 626.0
+offset_bottom = 421.0
+theme_override_font_sizes/font_size = 40
+text = "Dash
+"
+horizontal_alignment = 2

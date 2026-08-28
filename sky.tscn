@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://vbyqsvr8ycw"]
+
+[ext_resource type="Script" uid="uid://bmnw10r4rychw" path="res://sky.gd" id="1_gr5xt"]
+[ext_resource type="Script" uid="uid://cn7cgco5em1p0" path="res://color_rect.gd" id="2_dptxg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12t7q"]
+size = Vector2(400000, 400000)
+
+[node name="Sky" type="Area2D" unique_id=849726464]
+script = ExtResource("1_gr5xt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1328216961]
+shape = SubResource("RectangleShape2D_12t7q")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1985212792]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.3574337, 0.3574337, 1.8247963, 1)
+script = ExtResource("2_dptxg")
