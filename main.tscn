@@ -4,30 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b66oue2ahkpv8" path="res://wall.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://vbyqsvr8ycw" path="res://sky.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dx60jsyabvyv" path="res://water.tscn" id="4_1bvp3"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_12t7q"]
-friction = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_12t7q"]
-size = Vector2(20000, 20)
+[ext_resource type="PackedScene" uid="uid://dbbx71youc1gl" path="res://floor.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=1112543401]
-
-[node name="Floor" type="StaticBody2D" parent="." unique_id=1786002246]
-visibility_layer = 4
-physics_material_override = SubResource("PhysicsMaterial_12t7q")
-
-[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=1035203371]
-custom_minimum_size = Vector2(20000, 20)
-custom_maximum_size = Vector2(20000, 20)
-offset_left = -10000.0
-offset_right = 10000.0
-offset_bottom = 20.0
-color = Color(1, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1377452691]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_12t7q")
 
 [node name="Player" parent="." unique_id=845143329 instance=ExtResource("1_ig7tw")]
 top_level = true
@@ -65,3 +44,5 @@ rotation = -0.116937056
 
 [node name="wall6" parent="." unique_id=1572155295 instance=ExtResource("2_0xm2m")]
 position = Vector2(1288, -820)
+
+[node name="Floor" parent="." unique_id=1494293106 instance=ExtResource("5_lquwl")]

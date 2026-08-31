@@ -1,6 +1,6 @@
 extends CharacterBody2D
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-#To-Do: 
+#To-Do: Realistic x Movement, friction and jumping
 #get nodes, @onready waits for parent initialization before getting the node to avoid Nil error
 @onready var dash_label = get_node("Camera2D/DashLabel")
 @onready var double_jump_label = get_node("Camera2D/DoubleJumpLabel")
@@ -12,12 +12,11 @@ extends CharacterBody2D
 @onready var gravity_force_label = get_node("Camera2D/GravityForceLabel")
 @onready var buyoncy_label = get_node("Camera2D/BuyoncyLabel")
 #acceleration and speed variables
-@export var acceleration: float = 800.0
-@onready var increased_acceleration: float = 4.0 * acceleration
+@export var acceleration: float = 600.0
 @export var ground_friction: float = 3.0
-@export var mass: float = 1285.0
 @onready var horizontal_sprite_width = get_node("Sprite2D").texture.get_width()
 @onready var vertical_sprite_width = get_node("Sprite2D").texture.get_height()
+var max_power: float = 600.0
 var jump_speed = -500.0
 @export var dash_speed: float = 600.0
 #densities in kg/cm³
@@ -26,9 +25,10 @@ var submersion_percent: float = 0.0
 #friction variables
 @export var air_friction = 0.5
 @export var max_speed: float = 400
+var friction_coefficient = 0.0
 #density variables
 var density_height_scale = 850000.0 #px as the standard height scale is 850000.0 cm
-#get project gravity settings, should be 980px/s²
+#get project gravity settings, should be 981px/s²
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 #enable abilities, needed to turn them off later
 var can_jump = true
@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	var effective_mass: float = character_mass + (0.8 * displaced_mass)
 	var buyoncy: float = (current_density * character_submerged_size * gravity)
 	#drag 
-	var linear_drag = (-6.0 * PI * current_fluid_viscocity * (0.5 * (horizontal_sprite_width * horizontal_sprite_width))) * velocity 
+	var linear_drag = (-6.0 * PI * current_fluid_viscocity * (0.5 * (horizontal_sprite_width))) * velocity 
 	var square_drag: Vector2 = (velocity.normalized() * -0.5 * current_density * velocity.length_squared() * 1.05 * (horizontal_sprite_width * horizontal_sprite_width)) if velocity.length() > 0 else Vector2.ZERO
 	var total_drag: Vector2 = square_drag + linear_drag
 	print(square_drag)
@@ -77,10 +77,26 @@ func _physics_process(delta: float) -> void:
 			damping_force = velocity.y * (2 * sqrt(character_mass * (current_density * horizontal_sprite_width * gravity))) #critical damping force
 		if velocity.y > 100.0:
 			slamming_force = (PI / 4) * current_density * (horizontal_sprite_width * horizontal_sprite_width) * velocity.length_squared() #Wagners Hydrodynamic Impact Model
+	#get X input direction and calculate force
+	var direction := Input.get_axis("move_left", "move_right")
+	var stall_force = acceleration * effective_mass
+	var thrust_x: float = direction * min(stall_force, max_speed * stall_force / (max(abs(velocity.x), 2)))
+	#friction
+	if is_on_floor():
+		var floor = get_last_slide_collision()
+		if floor and "friction" in floor.get_collider():
+			friction_coefficient = floor.get_collider().friction
+		if abs(velocity.x) < 10.0 and direction == 0:
+			velocity.x = 0.0
+		if direction != 0 and sign(direction) != sign(velocity.x):
+			friction_coefficient = friction_coefficient * 4
+	else:
+		friction_coefficient = 0.0
+	var friction: float = sign(velocity.x) * friction_coefficient * (gravity_force - buyoncy)
 	#apply all forces
-	var total_vertical_force = gravity_force - buyoncy - damping_force - slamming_force
-	velocity.y += total_vertical_force / effective_mass * delta
-	velocity += total_drag / effective_mass * delta 
+	var total_vertical_force: Vector2 = Vector2(0.0, gravity_force - buyoncy - damping_force - slamming_force)
+	var total_horizontal_force: Vector2 = Vector2( thrust_x - friction , 0.0)
+	velocity += (total_vertical_force + total_horizontal_force + total_drag) / effective_mass * delta 
 	#display velocityx
 	var total_velocityx = round(velocity.x * 100) / 100
 	var velocity_textx = "VelocityX: %spx/s"
@@ -107,17 +123,6 @@ func _physics_process(delta: float) -> void:
 	var buyoncy_text = "Buyoncy: %s"
 	var actual_buyoncy_text = buyoncy_text % buyoncy
 	buyoncy_label.text = actual_buyoncy_text
-	#get X input direction
-	var direction := Input.get_axis("move_left", "move_right")
-	#movement calculation
-	var target_speed = direction * max_speed
-	if direction != 0:
-		var is_turning: bool = sign(velocity.x) != 0 and sign(velocity.x) != direction #turning detection
-		var x_accel: float = increased_acceleration if is_turning else acceleration #when turning use increased_acceleration, otherwise use acceleration
-		velocity.x = move_toward(velocity.x, target_speed, delta * x_accel)
-	#ground friction interpolation
-	elif is_on_floor():
-		velocity.x = lerp(velocity.x, 0.0, 1.0 - exp(delta * -ground_friction))
 	#jumping
 	if is_on_floor() and Input.is_action_pressed("move_up") and can_jump:
 		can_jump = false

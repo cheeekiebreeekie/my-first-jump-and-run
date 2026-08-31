@@ -10,3 +10,6 @@ const WATER = 0.001
 const AIR_VISCOCITY = 0.0000001138
 const VACUUM_VISCOCITY = 0.0
 const WATER_VISCOCITY = 0.00000011373
+
+#µ kinetic friction coefficient
+const GRASS_FRICTION = 0.40

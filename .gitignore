@@ -2,6 +2,8 @@
 .godot/
 *.import
 /android/
+*.tmp
+bin/
 
 #OS files
 .DS_Store
