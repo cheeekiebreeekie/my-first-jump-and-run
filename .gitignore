@@ -4,6 +4,7 @@
 /android/
 *.tmp
 bin/
+changelogs/
 
 #OS files
 .DS_Store

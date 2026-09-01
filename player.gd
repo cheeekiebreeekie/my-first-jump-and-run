@@ -28,6 +28,10 @@ var helium_density = 0.0000001786
 var character_density = oak_density
 #friction variables
 var friction_coefficient = 0.0
+var square_drag: Vector2 = Vector2.ZERO
+var linear_drag: Vector2 = Vector2.ZERO
+var total_force: Vector2 = Vector2.ZERO
+var total_drag: Vector2 = Vector2.ZERO
 #density variables
 var density_height_scale = 850000.0 #px as the standard height scale is 850000.0 cm
 #get project gravity settings, should be 981px/s²
@@ -44,11 +48,14 @@ func _physics_process(delta: float) -> void:
 	
 	#calculate gravity based on height
 	var radius_from_core: float = planet_radius - global_position.y
+	if is_zero_approx(radius_from_core):
+		radius_from_core = 0.001
 	var abs_radius_from_core: float = abs(radius_from_core)
+	var core_direction: float = 1.0 if radius_from_core >= 0 else -1.0
 	if abs_radius_from_core <= planet_radius:
-		gravity = surface_gravity * (abs_radius_from_core / planet_radius) * sign(radius_from_core)
+		gravity = surface_gravity * (abs_radius_from_core / planet_radius) * core_direction
 	elif abs_radius_from_core > planet_radius:
-		gravity = surface_gravity * (pow(planet_radius, 2.0) / pow(abs_radius_from_core, 2.0)) * sign(radius_from_core)
+		gravity = surface_gravity * (pow(planet_radius, 2.0) / pow(abs_radius_from_core, 2.0)) * core_direction
 		
 	#calculate character mass, calculated like a cuboid
 	var character_size: float = horizontal_sprite_width * horizontal_sprite_width * vertical_sprite_width
@@ -87,9 +94,11 @@ func _physics_process(delta: float) -> void:
 	var buyoncy: float = (current_density * character_submerged_size * gravity)
 	
 	#drag 
-	var linear_drag = (6.0 * PI * current_fluid_viscocity * (0.5 * (horizontal_sprite_width))) * velocity 
-	var square_drag: Vector2 = (0.5 * current_density * 1.05 * pow(horizontal_sprite_width, 2.0) * submersion_percent * velocity.normalized() * velocity.length_squared()) + (0.5 * current_density * 0.005 * pow(horizontal_sprite_width, 2.0) * submersion_percent * 4 * velocity.normalized() * velocity.length_squared()) if velocity.length() > 0 else Vector2.ZERO
-	var total_drag: Vector2 = square_drag + linear_drag
+	#linear drag (6 * Pi * rho * r) * v
+	linear_drag = (6.0 * PI * current_fluid_viscocity * (0.5 * (horizontal_sprite_width))) * velocity 
+	#square drag and skin friction (0.5 * rho * 1.05 "drag coeff" * A * S * v * |v|) + (0.5 * rho * 0.005 * A * S * 4 * v * |v|)
+	square_drag = (0.5 * current_density * 1.05 * pow(horizontal_sprite_width, 2.0) * submersion_percent * velocity * velocity.length()) + (0.5 * current_density * 0.005 * pow(horizontal_sprite_width, 2.0) * submersion_percent * 4 * velocity * velocity.length()) if velocity.length() > 0 else Vector2.ZERO
+	total_drag = square_drag + linear_drag
 	
 	#damping forces
 	var slamming_force: float = 0.0
@@ -100,7 +109,7 @@ func _physics_process(delta: float) -> void:
 	var damping_force: float = 0.0 
 	if submersion_percent > 0.0: 
 		#damping force v.y * cc * (c/cc)
-		stiffness = current_fluid_density * pow(horizontal_sprite_width, 2.0) * gravity #k = rho * width * g
+		stiffness = current_fluid_density * pow(horizontal_sprite_width, 2.0) * abs(gravity) #k = rho * width * g
 		critical_damping = 2.0 * sqrt(effective_mass * stiffness) #cc 2 sqrt(meff * k)
 		damping_ratio = 0.2 #cc, pulled out my ass with the help of gemini
 		damping_force = velocity.y * critical_damping * damping_ratio 
@@ -135,7 +144,7 @@ func _physics_process(delta: float) -> void:
 	#sum all forces and turn them into acceleration
 	var total_vertical_force: Vector2 = Vector2(0.0, gravity_force - buyoncy - slamming_force - damping_force)
 	var total_horizontal_force: Vector2 = Vector2( thrust_x - friction , 0.0)
-	var total_force = (total_vertical_force + total_horizontal_force - total_drag) / effective_mass * delta 
+	total_force = (total_vertical_force + total_horizontal_force - total_drag) / effective_mass * delta 
 	velocity += total_force
 	
 	#display velocityx
@@ -205,5 +214,5 @@ func _physics_process(delta: float) -> void:
 				can_dash = true
 				dash_label.modulate.a = 1.0
 				)
-#character movement function
+	#character movement function
 	move_and_slide()

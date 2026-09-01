@@ -14,12 +14,12 @@ position = Vector2(-4, -149)
 
 [node name="Sky" parent="." unique_id=849726464 instance=ExtResource("3_h2yge")]
 z_index = -2
-scale = Vector2(0.1, 0.1)
+position = Vector2(-176, 1058)
 
 [node name="Water" parent="." unique_id=790300976 instance=ExtResource("4_1bvp3")]
 z_index = -1
-position = Vector2(32, 1181)
-scale = Vector2(0.01, 0.01)
+position = Vector2(1183, 345)
+scale = Vector2(0.005, 0.005)
 
 [node name="wall" parent="." unique_id=1774559763 instance=ExtResource("2_0xm2m")]
 visibility_layer = 2
