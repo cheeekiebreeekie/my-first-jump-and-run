@@ -12,6 +12,15 @@
 top_level = true
 position = Vector2(-4, -149)
 
+[node name="Sky" parent="." unique_id=849726464 instance=ExtResource("3_h2yge")]
+z_index = -2
+scale = Vector2(0.1, 0.1)
+
+[node name="Water" parent="." unique_id=790300976 instance=ExtResource("4_1bvp3")]
+z_index = -1
+position = Vector2(32, 1181)
+scale = Vector2(0.01, 0.01)
+
 [node name="wall" parent="." unique_id=1774559763 instance=ExtResource("2_0xm2m")]
 visibility_layer = 2
 position = Vector2(-348, -103)
@@ -23,16 +32,6 @@ position = Vector2(-559, -456)
 [node name="wall3" parent="." unique_id=870814557 instance=ExtResource("2_0xm2m")]
 visibility_layer = 2
 position = Vector2(495, -655)
-
-[node name="Sky" parent="." unique_id=849726464 instance=ExtResource("3_h2yge")]
-z_index = -2
-position = Vector2(36.00003, -5710)
-scale = Vector2(0.01, 0.025)
-
-[node name="Water" parent="." unique_id=790300976 instance=ExtResource("4_1bvp3")]
-z_index = -1
-position = Vector2(32, 1181)
-scale = Vector2(0.01, 0.01)
 
 [node name="wall4" parent="." unique_id=1826155365 instance=ExtResource("2_0xm2m")]
 position = Vector2(1090, -807.9999)

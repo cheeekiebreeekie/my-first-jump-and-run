@@ -7,9 +7,9 @@ const VACUUM = 0.0
 const WATER = 0.001
 
 #in N * s/cm²
-const AIR_VISCOCITY = 0.0000001138
+const AIR_VISCOCITY = 0.0000001813
 const VACUUM_VISCOCITY = 0.0
-const WATER_VISCOCITY = 0.00000011373
+const WATER_VISCOCITY = 0.00001002
 
 #µ kinetic friction coefficient
 const GRASS_FRICTION = 0.40
