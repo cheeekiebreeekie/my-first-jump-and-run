@@ -5,6 +5,7 @@
 *.tmp
 bin/
 changelogs/
+*.pck
 
 #OS files
 .DS_Store

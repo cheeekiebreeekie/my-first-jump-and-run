@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - "-IC:/Users/n.jankovic/Desktop/my-first-jump-and-run/godot-cpp/include"
+    - "-IC:/Users/n.jankovic/Desktop/my-first-jump-and-run/godot-cpp/gen/include"
+    - "-IC:/Users/n.jankovic/Desktop/my-first-jump-and-run/godot-cpp/gdextension"
+    - "-IC:/Users/n.jankovic/Desktop/my-first-jump-and-run/src"
+    - "-std=c++20"

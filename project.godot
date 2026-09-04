@@ -13,7 +13,7 @@ config_version=5
 config/name="My First Jump And Run"
 run/main_scene="uid://c7e6tt22rde2a"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/images/icon.svg"
 
 [display]
 

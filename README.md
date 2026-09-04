@@ -11,7 +11,7 @@ My first ever Game made in Godot, featuring realistic physics
 ## Tech Stack
 
 * **Engine:** Godot 4.X
-* **Language:** GDScript
+* **Language:** GDScript, C++20
 
 ## License
 
