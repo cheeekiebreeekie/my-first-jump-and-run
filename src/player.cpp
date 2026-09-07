@@ -266,7 +266,7 @@ void Player::_physics_process(double delta) {
     if (Math::sign(direction) == Math::sign(velocity.x)) {
         thrust_x = direction * Math::min(stall_force, (max_power * stall_force) / Math::max(static_cast<double>(Math::abs(velocity.x)), 1.0));
     } else if (Math::sign(direction) != Math::sign(velocity.x)) {
-        thrust_x = 2 * direction * Math::min(stall_force, (max_power * stall_force) / Math::max(static_cast<double>(Math::abs(velocity.x)), 1.0)) ;
+        thrust_x = 4 * direction * Math::min(stall_force, (max_power * stall_force) / Math::max(static_cast<double>(Math::abs(velocity.x)), 1.0)) ;
     }
     ////////////////////////////////////////////////////////////////////
 
