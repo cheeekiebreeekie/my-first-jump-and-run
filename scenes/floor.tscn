@@ -19,7 +19,7 @@ custom_maximum_size = Vector2(20000, 20)
 offset_left = -10000.0
 offset_right = 10000.0
 offset_bottom = 20.0
-color = Color(1, 0, 0, 1)
+color = Color(0.33961967, 0.18957946, 1.4439226e-07, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=545379465]
 position = Vector2(0, 10)

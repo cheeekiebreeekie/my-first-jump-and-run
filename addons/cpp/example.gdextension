@@ -6,3 +6,4 @@ reloadable = false
 [libraries]
 windows.debug.x86_64 = "res://bin/windows/EXTENSION-NAME.windows.template_debug.x86_64.dll"
 windows.release.x86_64 = "res://bin/windows/EXTENSION-NAME.windows.template_release.x86_64.dll"
+linux.release.x86_64 = "res://bin/linux/libEXTENSION-NAME.linux.template_release.x86_64.so"

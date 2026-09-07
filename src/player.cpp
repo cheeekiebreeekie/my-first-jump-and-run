@@ -381,6 +381,7 @@ void Player::_physics_process(double delta) {
             dash_timer = 2.0;
         }
     }
+    ////////////////////////////////////////////////////////////////////
 
     //floor detection for ability activation and label alpha channel 100%
     if (is_on_floor()) {

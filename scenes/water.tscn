@@ -15,5 +15,5 @@ shape = SubResource("RectangleShape2D_12t7q")
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1985212792]
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0, 0, 1, 1)
+color = Color(0, 0, 1, 0.5019608)
 script = ExtResource("2_dcmoc")
