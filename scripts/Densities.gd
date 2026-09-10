@@ -13,3 +13,4 @@ const WATER_VISCOCITY = 0.00001002
 
 #µ kinetic friction coefficient
 const GRASS_FRICTION = 0.50
+const CONCRETE_FRICTION = 0.70

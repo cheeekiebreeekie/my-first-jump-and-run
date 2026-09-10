@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://bd5p0pmgumbwn"]
+
+[ext_resource type="Script" uid="uid://clsf488wblqg8" path="res://scripts/area_flag.gd" id="1_leh7l"]
+[ext_resource type="Texture2D" uid="uid://djdk1fasog6hy" path="res://assets/images/Flat/Germany/DE_Ortho_Flat-192x136.png" id="2_sphw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12t7q"]
+size = Vector2(192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgk7g"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(0, 0, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2gyp"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(192, 0, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfofk"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(384, 0, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxvjw"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(576, 0, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cakhr"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(0, 136, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0bul"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(192, 136, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdt5d"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(384, 136, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooddo"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(576, 136, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg73p"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(0, 272, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7shn"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(192, 272, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t38eg"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(384, 272, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsd6q"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(576, 272, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3k5w"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(0, 408, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usm2t"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(192, 408, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlsiv"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(384, 408, 192, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gglex"]
+atlas = ExtResource("2_sphw2")
+region = Rect2(576, 408, 192, 136)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hfofk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgk7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2gyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfofk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxvjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cakhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0bul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdt5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooddo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg73p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7shn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t38eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsd6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3k5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usm2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlsiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gglex")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="AreaFlag" type="Area2D" unique_id=108783935]
+script = ExtResource("1_leh7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=8906491]
+shape = SubResource("RectangleShape2D_12t7q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=41462956]
+sprite_frames = SubResource("SpriteFrames_hfofk")
+autoplay = "default"
+frame_progress = 0.25545034
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

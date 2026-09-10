@@ -34,7 +34,6 @@ namespace Densities {
     constexpr double WATER_VISCOSITY = 0.00001002;
 }
 
-
 namespace godot{
 
 Player::Player(){
@@ -320,7 +319,7 @@ void Player::_physics_process(double delta) {
     std::string medium_text = std::format("Medium: {:f}", current_fluid_density);
     medium_label->set_text(medium_text.c_str());
     //display current density
-    std::string density_text = std::format("Current Density: {}", current_density);
+    std::string density_text = std::format("Current Density: {:f}", current_density);
     current_density_label->set_text(density_text.c_str());
     //display current gravity force
     std::string gravity_text = std::format("Vertical Force: ({}, {})", total_vertical_force.x, total_vertical_force.y);
@@ -395,6 +394,11 @@ void Player::_physics_process(double delta) {
         stomp_label->set_modulate(colorb);
     }
     ////////////////////////////////////////////////////////////////////
+    //switch density
+    if (Input::get_singleton()->is_action_just_pressed("r")) {
+        current_density_index = (current_density_index + 1) % density_vector.size();
+        character_density = density_vector[current_density_index];
+    }
     ////////////////////////////////////////////////////////////////////
 
 

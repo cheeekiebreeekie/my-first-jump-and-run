@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://rlne827k87f5"]
+
+[ext_resource type="Shader" uid="uid://c3k5n5tpk4imb" path="res://assets/shaders/atmosphere.gdshader" id="1_ne2mo"]
+[ext_resource type="Texture2D" uid="uid://6of1mgmg32c5" path="res://assets/images/sky.png" id="2_6cvei"]
+[ext_resource type="PackedScene" uid="uid://vbyqsvr8ycw" path="res://scenes/sky.tscn" id="3_que50"]
+[ext_resource type="PackedScene" uid="uid://dx60jsyabvyv" path="res://scenes/water.tscn" id="4_hey2k"]
+[ext_resource type="PackedScene" uid="uid://b66oue2ahkpv8" path="res://scenes/wall.tscn" id="5_172wr"]
+[ext_resource type="PackedScene" uid="uid://dbbx71youc1gl" path="res://scenes/floor.tscn" id="6_g2hoc"]
+[ext_resource type="Shader" uid="uid://bmrcktwatv0bk" path="res://assets/shaders/ground.gdshader" id="7_fldb1"]
+[ext_resource type="PackedScene" uid="uid://bd5p0pmgumbwn" path="res://scenes/area_flag.tscn" id="8_guvtl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("1_ne2mo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_conm7"]
+shader = ExtResource("7_fldb1")
+shader_parameter/taper_width = 0.1
+shader_parameter/taper_slope = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejswk"]
+shader = ExtResource("7_fldb1")
+shader_parameter/taper_width = 0.1
+shader_parameter/taper_slope = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbk5w"]
+shader = ExtResource("7_fldb1")
+shader_parameter/taper_width = 0.1
+shader_parameter/taper_slope = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("7_fldb1")
+shader_parameter/taper_width = 0.1
+shader_parameter/taper_slope = 1.0
+
+[node name="level2" type="Node2D" unique_id=1112543401]
+
+[node name="sky texture" type="TextureRect" parent="." unique_id=521605076]
+z_index = -99
+texture_filter = 1
+material = SubResource("ShaderMaterial_tipki")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -10672.0
+offset_top = -2304.0
+offset_right = -5281.75
+offset_bottom = -1728.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture = ExtResource("2_6cvei")
+stretch_mode = 1
+
+[node name="Sky" parent="." unique_id=849726464 instance=ExtResource("3_que50")]
+z_index = -2
+position = Vector2(1523, -304)
+scale = Vector2(0.05, 0.01)
+
+[node name="Water" parent="." unique_id=790300976 instance=ExtResource("4_hey2k")]
+z_index = -1
+position = Vector2(1183, 1000)
+scale = Vector2(0.005, 0.005)
+
+[node name="wall" parent="." unique_id=1774559763 instance=ExtResource("5_172wr")]
+visibility_layer = 2
+position = Vector2(-348, -100)
+
+[node name="wall2" parent="." unique_id=776471174 instance=ExtResource("5_172wr")]
+visibility_layer = 2
+position = Vector2(-559, -456)
+
+[node name="wall3" parent="." unique_id=870814557 instance=ExtResource("5_172wr")]
+visibility_layer = 2
+position = Vector2(495, -655)
+
+[node name="Floor7" parent="." unique_id=1991686971 instance=ExtResource("6_g2hoc")]
+position = Vector2(-1854, 641)
+scale = Vector2(0.25, 32)
+
+[node name="Floor5" parent="." unique_id=605211564 instance=ExtResource("6_g2hoc")]
+position = Vector2(2227, 1400)
+scale = Vector2(0.1, 32)
+
+[node name="ColorRect" parent="Floor5" index="0" unique_id=1385088256]
+material = SubResource("ShaderMaterial_conm7")
+
+[node name="Floor3" parent="." unique_id=1214257807 instance=ExtResource("6_g2hoc")]
+position = Vector2(890, 707.00006)
+rotation = 0.7853982
+scale = Vector2(0.1, 31.999998)
+
+[node name="ColorRect" parent="Floor3" index="0" unique_id=1385088256]
+material = SubResource("ShaderMaterial_ejswk")
+
+[node name="Floor4" parent="." unique_id=939771617 instance=ExtResource("6_g2hoc")]
+position = Vector2(3540, 634.99994)
+rotation = -0.87266463
+scale = Vector2(0.1, 32)
+
+[node name="ColorRect" parent="Floor4" index="0" unique_id=1385088256]
+material = SubResource("ShaderMaterial_bbk5w")
+
+[node name="Water2" parent="." unique_id=210471504 instance=ExtResource("4_hey2k")]
+z_index = -1
+position = Vector2(3183, 1000)
+scale = Vector2(0.005, 0.005)
+
+[node name="Floor6" parent="." unique_id=475224131 instance=ExtResource("6_g2hoc")]
+position = Vector2(6692, -102)
+scale = Vector2(0.25, 32)
+
+[node name="Floor" parent="." unique_id=1562066540 instance=ExtResource("6_g2hoc")]
+position = Vector2(-2317, 0)
+scale = Vector2(0.25, 64)
+
+[node name="ColorRect" parent="Floor" index="0" unique_id=1385088256]
+material = SubResource("ShaderMaterial_choun")
+
+[node name="AreaFlag" parent="." unique_id=108783935 groups=["level"] instance=ExtResource("8_guvtl")]
+z_index = -4
+position = Vector2(3971, -86)
+next_level_path = "uid://dww0w3j58sio2"
+
+[editable path="Floor5"]
+[editable path="Floor3"]
+[editable path="Floor4"]
+[editable path="Floor"]

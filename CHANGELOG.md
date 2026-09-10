@@ -1,8 +1,8 @@
 # Changelog
-## [v0.1.0] - 01.01.2001
+## [v0.2.0] - 09.09.2026
 
 ### Added
-
-### Changed
-- completely rewritten player.gd as a C++ node
-### Fixed
+- loading flag to load next levels
+- "retro" shader to "render" internally at 480x270
+- multiple other shaders for floors or atmosphere
+- density changing with "r" button (oak, concrete and aerogel)

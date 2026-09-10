@@ -1,125 +1,30 @@
 [gd_scene format=3 uid="uid://c7e6tt22rde2a"]
 
 [ext_resource type="PackedScene" uid="uid://drajm3wmsbnvv" path="res://scenes/player.tscn" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://6of1mgmg32c5" path="res://assets/images/sky.png" id="1_tefeu"]
-[ext_resource type="PackedScene" uid="uid://b66oue2ahkpv8" path="res://scenes/wall.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://vbyqsvr8ycw" path="res://scenes/sky.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dx60jsyabvyv" path="res://scenes/water.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dbbx71youc1gl" path="res://scenes/floor.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dww0w3j58sio2" path="res://scenes/level1.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://11glu3c318m0" path="res://scenes/main.gd" id="1_sugp2"]
+[ext_resource type="Shader" uid="uid://df58cdkpo4ud6" path="res://assets/shaders/levelloadtransition.gdshader" id="4_jyhfs"]
 
-[node name="Main" type="Node2D" unique_id=1112543401]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
+shader = ExtResource("4_jyhfs")
+shader_parameter/progress = 0.0
+shader_parameter/grid_size = Vector2(32, 18)
 
-[node name="sky texture" type="TextureRect" parent="." unique_id=521605076]
-z_index = -99
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="main" type="Node2D" unique_id=623931325]
+script = ExtResource("1_sugp2")
+
+[node name="level1" parent="." unique_id=1112543401 instance=ExtResource("1_o5qli")]
+
+[node name="LevelLoadTransition" type="CanvasLayer" parent="." unique_id=1966775013]
+
+[node name="ColorRect" type="ColorRect" parent="LevelLoadTransition" unique_id=1130366998]
+material = SubResource("ShaderMaterial_tbgi4")
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -10672.0
-offset_top = -2304.0
-offset_right = -5281.75
-offset_bottom = -1728.0
 grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(4, 4)
-texture = ExtResource("1_tefeu")
-stretch_mode = 1
+grow_vertical = 2
 
-[node name="Player" parent="." unique_id=845143329 instance=ExtResource("1_ig7tw")]
-top_level = true
-position = Vector2(-4, -149)
-
-[node name="Sky" parent="." unique_id=849726464 instance=ExtResource("3_h2yge")]
-z_index = -2
-position = Vector2(1523, -304)
-scale = Vector2(0.05, 0.01)
-
-[node name="Water" parent="." unique_id=790300976 instance=ExtResource("4_1bvp3")]
-z_index = -1
-position = Vector2(1183, 1000)
-scale = Vector2(0.005, 0.005)
-
-[node name="wall" parent="." unique_id=1774559763 instance=ExtResource("2_0xm2m")]
-visibility_layer = 2
-position = Vector2(-348, -103)
-
-[node name="wall2" parent="." unique_id=776471174 instance=ExtResource("2_0xm2m")]
-visibility_layer = 2
-position = Vector2(-559, -456)
-
-[node name="wall3" parent="." unique_id=870814557 instance=ExtResource("2_0xm2m")]
-visibility_layer = 2
-position = Vector2(495, -655)
-
-[node name="wall4" parent="." unique_id=1826155365 instance=ExtResource("2_0xm2m")]
-position = Vector2(1090, -807.9999)
-rotation = -0.11659703
-
-[node name="wall5" parent="." unique_id=2047624361 instance=ExtResource("2_0xm2m")]
-position = Vector2(892.0001, -784.00006)
-rotation = -0.116937056
-
-[node name="wall6" parent="." unique_id=1572155295 instance=ExtResource("2_0xm2m")]
-position = Vector2(1288, -820)
-
-[node name="Floor" parent="." unique_id=1494293106 instance=ExtResource("5_lquwl")]
-position = Vector2(-2317, 0)
-scale = Vector2(0.25, 64)
-
-[node name="Floor2" parent="." unique_id=1559430388 instance=ExtResource("5_lquwl")]
-position = Vector2(6683, -2000.0001)
-scale = Vector2(0.25, 132)
-
-[node name="Floor3" parent="." unique_id=1214257807 instance=ExtResource("5_lquwl")]
-position = Vector2(890, 707.00006)
-rotation = 0.7853982
-scale = Vector2(0.1, 32)
-
-[node name="Floor4" parent="." unique_id=939771617 instance=ExtResource("5_lquwl")]
-position = Vector2(3540, 634.99994)
-rotation = -0.87266463
-scale = Vector2(0.1, 32)
-
-[node name="Water2" parent="." unique_id=210471504 instance=ExtResource("4_1bvp3")]
-z_index = -1
-position = Vector2(3183, 1000)
-scale = Vector2(0.005, 0.005)
-
-[node name="wall7" parent="." unique_id=2004131262 instance=ExtResource("2_0xm2m")]
-position = Vector2(1737, -1213)
-
-[node name="wall8" parent="." unique_id=829217420 instance=ExtResource("2_0xm2m")]
-position = Vector2(1937, -1513)
-scale = Vector2(1, 4)
-
-[node name="wall9" parent="." unique_id=1113474765 instance=ExtResource("2_0xm2m")]
-position = Vector2(1937, -1973)
-scale = Vector2(1, 3)
-
-[node name="Floor5" parent="." unique_id=605211564 instance=ExtResource("5_lquwl")]
-position = Vector2(2232, 1280)
-scale = Vector2(0.5, 32)
-
-[node name="Floor6" parent="." unique_id=475224131 instance=ExtResource("5_lquwl")]
-position = Vector2(6159, 640)
-scale = Vector2(0.25, 32)
-
-[node name="Floor7" parent="." unique_id=1991686971 instance=ExtResource("5_lquwl")]
-position = Vector2(-1854, 641)
-scale = Vector2(0.25, 32)
-
-[node name="wall10" parent="." unique_id=2008200434 instance=ExtResource("2_0xm2m")]
-position = Vector2(1637, -1973)
-scale = Vector2(2, 1)
-
-[node name="Floor8" parent="." unique_id=633934504 instance=ExtResource("5_lquwl")]
-position = Vector2(-3374, -2266.0002)
-rotation = 1.134464
-scale = Vector2(0.25, 64)
-
-[node name="Floor9" parent="." unique_id=1753199077 instance=ExtResource("5_lquwl")]
-position = Vector2(-3535, 264)
-rotation = 1.5707964
-scale = Vector2(0.25, 64)
+[node name="Player" parent="." unique_id=1732272226 instance=ExtResource("1_ig7tw")]
+visibility_layer = 524289
+position = Vector2(-1, -83)

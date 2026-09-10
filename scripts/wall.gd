@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var friction = Densities.GRASS_FRICTION
+var friction = Densities.CONCRETE_FRICTION
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

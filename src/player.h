@@ -5,6 +5,8 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
+#include <vector>
+
 #include <godot_cpp/classes/project_settings.hpp>
 
 namespace godot {
@@ -38,10 +40,12 @@ private:
     double character_bottom = 0.0;
 
     //densities in kg/cm³
-    double oak_density = 0.00077;
-    double aerogel_density = 0.000002;
-    double helium_density = 0.0000001786;
-    double character_density = oak_density;
+    int current_density_index = 0;
+    inline static const double oak_density = 0.00077;
+    inline static const double aerogel_density = 0.000002;
+    inline static const double concrete_density = 0.0024;
+    std::vector<double> density_vector = {oak_density, concrete_density, aerogel_density};
+    double character_density = density_vector[0];
 
     //friction variables
     double friction_coefficient = 0.0;
@@ -84,8 +88,8 @@ protected:
     static void _bind_methods();
 
 public:
-    void _physics_process(double delta) override;
     void _ready() override;
+    void _physics_process(double delta) override;
 
     Player();
     ~Player();
