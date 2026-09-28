@@ -3,6 +3,7 @@
 .import/
 .godot/
 /gen/
+/__pycache__/
 
 # Godot 3.x ignores
 include/gen
