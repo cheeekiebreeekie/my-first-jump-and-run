@@ -71,6 +71,7 @@ logs/
 
 # Visual C++ cache files
 ipch/
+.vscode
 *.aps
 *.ncb
 *.opensdf

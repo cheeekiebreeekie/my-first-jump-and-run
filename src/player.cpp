@@ -1,10 +1,10 @@
 #include "player.h"
 #include "godot_cpp/classes/kinematic_collision2d.hpp"
+#include "godot_cpp/variant/node_path.hpp"
 #include "godot_cpp/variant/string.hpp"
 
 #include <algorithm>
 #include <string>
-#include <format>
 #include <math.h>
 
 #include <godot_cpp/classes/project_settings.hpp>
@@ -51,7 +51,7 @@ void Player::_ready(){
 
     //import project gravity settings
     ProjectSettings *settings = ProjectSettings::get_singleton();
-    Sprite2D *sprite  = get_node<Sprite2D>("Sprite2D");
+    Sprite2D *sprite  = _get_Node<Sprite2D>("Sprite2D");
 
     surface_gravity = settings->get_setting("physics/2d/default_gravity");
     gravity = surface_gravity;
@@ -65,58 +65,18 @@ void Player::_ready(){
             vertical_sprite_width = static_cast<int>(texture->get_height());
         }
     }
-
     //get Area2D as pointer so it doesn't pull the entire area2d object into memory
-    Node *detector_node = get_node_or_null(NodePath("Area2D"));
-    if (detector_node != nullptr) {
-        area_detector = Object::cast_to<Area2D>(detector_node);
-    }
+    area_detector = _get_Node<Area2D>("Area2D");
     //get labels
-    //velocty.x label
-    Node *velocity_label_x_node = get_node_or_null(NodePath("Camera2D/VelocityLabelX"));
-    if (velocity_label_x_node != nullptr) {
-        velocity_label_x = Object::cast_to<Label>(velocity_label_x_node); 
-    }
-    //velocity.y label
-    Node *velocity_label_y_node = get_node_or_null(NodePath("Camera2D/VelocityLabelY"));
-    if (velocity_label_y_node != nullptr) {
-        velocity_label_y = Object::cast_to<Label>(velocity_label_y_node);
-    }
-    //medium label
-    Node *medium_label_node = get_node_or_null(NodePath("Camera2D/MediumLabel"));
-    if (medium_label_node != nullptr) {
-        medium_label = Object::cast_to<Label>(medium_label_node);
-    }
-    //current density label
-    Node *current_density_label_node = get_node_or_null(NodePath("Camera2D/CurrentDensityLabel"));
-    if (current_density_label_node != nullptr) {
-        current_density_label = Object::cast_to<Label>(current_density_label_node);
-    }
-    //total_vertical_force label
-    Node *gravity_force_label_node = get_node_or_null(NodePath("Camera2D/GravityForceLabel"));
-    if (gravity_force_label_node != nullptr) {
-        gravity_force_label = Object::cast_to<Label>(gravity_force_label_node);
-    }
-    //current buoyancy label
-    Node *buoyancy_label_node = get_node_or_null(NodePath("Camera2D/BuoyancyLabel"));
-    if (buoyancy_label_node != nullptr) {
-        buoyancy_label = Object::cast_to<Label>(buoyancy_label_node);
-    }
-    //dash label
-    Node *dash_label_node = get_node_or_null(NodePath("Camera2D/DashLabel"));
-    if (dash_label_node != nullptr) {
-        dash_label = Object::cast_to<Label>(dash_label_node);
-    }
-    //double jump label
-    Node *double_jump_label_node = get_node_or_null(NodePath("Camera2D/DoubleJumpLabel"));
-    if (double_jump_label_node != nullptr) {
-        double_jump_label = Object::cast_to<Label>(double_jump_label_node);
-    }
-    //downward dash label
-    Node *stomp_label_node = get_node_or_null(NodePath("Camera2D/StompLabel"));
-    if (stomp_label_node != nullptr) {
-        stomp_label = Object::cast_to<Label>(stomp_label_node);
-    }
+    velocity_label_x = _get_Node<Label>("Camera2D/VelocityLabelX");
+    velocity_label_y = _get_Node<Label>("Camera2D/VelocityLabelY");
+    medium_label = _get_Node<Label>("Camera2D/MediumLabel");
+    current_density_label = _get_Node<Label>("Camera2D/CurrentDensityLabel");
+    gravity_force_label = _get_Node<Label>("Camera2D/GravityForceLabel");
+    buoyancy_label = _get_Node<Label>("Camera2D/BuoyancyLabel");
+    dash_label = _get_Node<Label>("Camera2D/DashLabel");
+    double_jump_label = _get_Node<Label>("Camera2D/DoubleJumpLabel");
+    stomp_label = _get_Node<Label>("Camera2D/StompLabel");
     ////////////////////////////////////////////////////////////////////
 
 
@@ -127,8 +87,6 @@ void Player::_physics_process(double delta) {
     if (Engine::get_singleton()->is_editor_hint()) {
         return;
     }
-
-
 
     Vector2 velocity = get_velocity();
 
@@ -148,17 +106,19 @@ void Player::_physics_process(double delta) {
     } else if (abs_radius_from_core >= planet_radius) {
         gravity = surface_gravity * (Math::pow(planet_radius, 2.0) / Math::pow(abs_radius_from_core, 2.0)) *core_direction;
     }
+    ////////////////////////////////////////////////////////////////////
 
     //calculate character mass, calculated like a cuboid
     character_size = horizontal_sprite_width * horizontal_sprite_width * vertical_sprite_width;
     character_mass = character_size * character_density;
+    ////////////////////////////////////////////////////////////////////
 
     //gravity force
     gravity_force = (character_mass * gravity);
+    ////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////
     //get overlapping areas/////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////
     if (!area_detector){
         return;
     }
@@ -184,7 +144,7 @@ void Player::_physics_process(double delta) {
         }
         character_bottom = static_cast<double>(get_global_position().y) + (vertical_sprite_width * 0.5);
 
-        CollisionShape2D *area_shape_node = top_z_level_area->get_node<CollisionShape2D>(NodePath("CollisionShape2D"));
+        CollisionShape2D *area_shape_node = top_z_level_area -> get_node<CollisionShape2D>(NodePath("CollisionShape2D"));
 
         if (area_shape_node) {
             Ref<RectangleShape2D> area_shape = Object::cast_to<RectangleShape2D>(area_shape_node->get_shape().ptr());
@@ -307,26 +267,12 @@ void Player::_physics_process(double delta) {
     ////////////////////////////////////////////////////////////////////
 
     //displays
-    //display velocity.x
-    double total_velocity_x = Math::round(velocity.x * 100.0) / 100.0;
-    std::string velocity_text_x = std::format("VelocityX: {}", total_velocity_x);
-    velocity_label_x->set_text(velocity_text_x.c_str());
-    //display velocity.y
-    double total_velocity_y = Math::round(velocity.y * 100.0) / 100.0;
-    std::string velocity_text_y = std::format("VelocityY: {}", total_velocity_y);
-    velocity_label_y->set_text(velocity_text_y.c_str());
-    //display medium
-    std::string medium_text = std::format("Medium: {:f}", current_fluid_density);
-    medium_label->set_text(medium_text.c_str());
-    //display current density
-    std::string density_text = std::format("Current Density: {:f}", current_density);
-    current_density_label->set_text(density_text.c_str());
-    //display current gravity force
-    std::string gravity_text = std::format("Vertical Force: ({}, {})", total_vertical_force.x, total_vertical_force.y);
-    gravity_force_label->set_text(gravity_text.c_str());
-    //display current buoyancy
-    std::string buoyancy_text = std::format("Buoyancy: {}", buoyancy);
-    buoyancy_label->set_text(buoyancy_text.c_str());
+    velocity_label_x->set_text(_write_Label("VelocityX: {:.2f}",  velocity.x));
+    velocity_label_y->set_text(_write_Label("VelocityY: {:.2f}", velocity.y));
+    medium_label->set_text(_write_Label("Medium: {:.9f}", current_fluid_density));
+    current_density_label->set_text(_write_Label("Current Density: {:.9f}", current_density));
+    gravity_force_label->set_text(_write_Label("Vertical Force: ({:.2f}, {:.2f})", total_vertical_force.x, total_vertical_force.y));
+    buoyancy_label->set_text(_write_Label("Buoyancy: {:.2f}", buoyancy));
     ////////////////////////////////////////////////////////////////////
 
     //abiliities

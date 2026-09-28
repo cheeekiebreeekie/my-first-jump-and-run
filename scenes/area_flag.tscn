@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://djdk1fasog6hy" path="res://assets/images/Flat/Germany/DE_Ortho_Flat-192x136.png" id="2_sphw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12t7q"]
-size = Vector2(192, 136)
+size = Vector2(202, 146)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgk7g"]
 atlas = ExtResource("2_sphw2")

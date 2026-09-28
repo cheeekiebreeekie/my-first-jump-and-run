@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dww0w3j58sio2"]
 
+[ext_resource type="Texture2D" uid="uid://c0fkafhtmck6g" path="res://assets/images/nightskycolor.png" id="1_conm7"]
 [ext_resource type="Shader" uid="uid://c3k5n5tpk4imb" path="res://assets/shaders/atmosphere.gdshader" id="1_ejswk"]
 [ext_resource type="Texture2D" uid="uid://6of1mgmg32c5" path="res://assets/images/sky.png" id="2_bbk5w"]
 [ext_resource type="PackedScene" uid="uid://vbyqsvr8ycw" path="res://scenes/sky.tscn" id="3_conm7"]
@@ -48,6 +49,16 @@ shader_parameter/taper_width = 0.1
 shader_parameter/taper_slope = 1.0
 
 [node name="level1" type="Node2D" unique_id=1112543401 groups=["level"]]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=328345699]
+z_index = -99
+offset_left = -11525.999
+offset_top = -14146.0
+offset_right = -4927.142
+offset_bottom = -10138.857
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_conm7")
+stretch_mode = 1
 
 [node name="sky texture" type="TextureRect" parent="." unique_id=521605076]
 z_index = -99
@@ -177,8 +188,8 @@ position = Vector2(6364, 619)
 scale = Vector2(0.25, 32)
 
 [node name="wall10" parent="." unique_id=2008200434 instance=ExtResource("5_u3awl")]
-position = Vector2(1637, -1989)
-scale = Vector2(2, 1)
+position = Vector2(1687, -1989)
+scale = Vector2(1.5, 1)
 
 [node name="Floor9" parent="." unique_id=1753199077 instance=ExtResource("6_2ku1j")]
 position = Vector2(-3711, 196)
@@ -190,8 +201,8 @@ position = Vector2(2292, 1669)
 scale = Vector2(0.5, 64)
 
 [node name="Floor11" parent="." unique_id=1792601585 instance=ExtResource("6_2ku1j")]
-position = Vector2(-1535, 1263)
-scale = Vector2(0.25, 32)
+position = Vector2(-1507, 1269)
+scale = Vector2(0.24968073, 77.80766)
 
 [node name="Floor12" parent="." unique_id=403515769 instance=ExtResource("6_2ku1j")]
 position = Vector2(5975, 1218)
@@ -206,7 +217,7 @@ material = SubResource("ShaderMaterial_choun")
 
 [node name="AreaFlag" parent="." unique_id=108783935 instance=ExtResource("8_bbk5w")]
 z_index = -4
-position = Vector2(5255, -2068)
+position = Vector2(3049, -2908)
 next_level_path = "uid://rlne827k87f5"
 
 [editable path="Floor8"]

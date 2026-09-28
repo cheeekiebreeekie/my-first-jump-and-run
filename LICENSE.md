@@ -16,16 +16,14 @@ that would otherwise infringe the licensor's copyright
 in it for any permitted purpose.  However, you may
 only distribute the software according to [Distribution
 License](#distribution-license) and make changes or new works
-based on the software according to [Changes and New Works
-License](#changes-and-new-works-license).
+based on the software according to [Changes and New Works License](#changes-and-new-works-license).
 
 ## Distribution License
 
 The licensor grants you an additional copyright license
 to distribute copies of the software.  Your license
 to distribute covers distributing the software with
-changes and new works permitted by [Changes and New Works
-License](#changes-and-new-works-license).
+changes and new works permitted by [Changes and New Works License](#changes-and-new-works-license).
 
 ## Notices
 
@@ -132,4 +130,10 @@ software under these terms.
 of your licenses.
 
 ## Streaming and Content Creation Exception
-Notwithstanding the non-commercial restrictions of this license, content creators (such as YouTubers and Twitch streamers) are permitted to monetize video content, live streams, and reviews featuring gameplay or footage of software built using this code, provided they include proper attribution.
+Notwithstanding the non-commercial restrictions of this license, 
+content creators (such as YouTubers and Twitch streamers) are permitted 
+to monetize video content, live streams, and reviews featuring gameplay 
+or footage of software built using this code, provided they include proper attribution.
+
+
+Rights Reserved for Text and Data Mining: Pursuant to Article 4(3) of EU Directive 2019/790 and § 44b UrhG, text and data mining, scraping, and training of AI/LLM models on this repository are strictly prohibited.

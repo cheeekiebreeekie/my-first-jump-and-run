@@ -1,8 +1,8 @@
 # Changelog
-## [v0.2.0] - 09.09.2026
+## [v0.0.0] - 01.01.2001
 
 ### Added
-- loading flag to load next levels
-- "retro" shader to "render" internally at 480x270
-- multiple other shaders for floors or atmosphere
-- density changing with "r" button (oak, concrete and aerogel)
+
+### Changed
+
+### Fixed

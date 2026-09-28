@@ -1,11 +1,14 @@
 #pragma once
 
+#include "godot_cpp/variant/string.hpp"
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
+#include <string_view>
 #include <vector>
+#include <format>
 
 #include <godot_cpp/classes/project_settings.hpp>
 
@@ -88,8 +91,29 @@ protected:
     static void _bind_methods();
 
 public:
+    Area2D* _get_label(String path_to_node);
     void _ready() override;
     void _physics_process(double delta) override;
+
+    template <typename T> 
+    T* _get_Node(const NodePath &path_to_node){
+        if (T *node = get_node<T>(path_to_node)) {
+            return node;
+        }
+        ERR_PRINT("FAILED TO GET NODE AT PATH: " + String(path_to_node));
+        return memnew(T);
+    }
+
+    template <typename... T1>
+    std::string vformat_helper(std::string_view text, const T1&... args){
+        return std::vformat(text, std::make_format_args(args...));
+    }
+
+    template <typename... T1> 
+    godot::String _write_Label(const std::string text, const T1&... value){
+        std::string value_text = vformat_helper(text, value...);
+        return value_text.c_str();
+    }
 
     Player();
     ~Player();
