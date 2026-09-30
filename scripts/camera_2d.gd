@@ -8,6 +8,7 @@ extends Camera2D
 @export var max_zoom: Vector2 = Vector2(0.5, 0.5)
 @export var zoom_speed: float = 8.0
 @onready var color_rect: ColorRect = $ColorRect
+@onready var pause_Menu: pause_menu = $pauseMenu
 @onready var base_size: Vector2 = color_rect.size
 
 var is_zoom: bool = true
@@ -60,4 +61,6 @@ func _process(delta: float) -> void:
 	if color_rect:
 		var target_size = base_size / zoom
 		color_rect.size = target_size
+		pause_Menu.size = target_size
+		pause_Menu.position = -target_size / 2.0
 		color_rect.position = -target_size / 2.0

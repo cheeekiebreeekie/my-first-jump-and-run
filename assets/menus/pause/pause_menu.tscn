@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cfu60boabltbf"]
+
+[ext_resource type="Script" uid="uid://dmhtk0vaf4a01" path="res://assets/menus/pause/scripts/pause_menu.gd" id="1_7gexk"]
+
+[node name="pauseMenu" type="Control" node_paths=PackedStringArray("children", "exitButton", "resumeButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7gexk")
+children = NodePath("MarginContainer")
+exitButton = NodePath("MarginContainer/VBoxContainer/Exit")
+resumeButton = NodePath("MarginContainer/VBoxContainer/Resume")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Resume
+"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Exit
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

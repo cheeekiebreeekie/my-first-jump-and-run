@@ -1,11 +1,12 @@
 # Changelog
-## [v0.2.1] - 01.01.2001
+## [v0.2.2] - 01.10.2026
 
 ### Added
-* robots.txt
+* launcher executable
+* Binary checks
 ### Changed
-* Linux Binaries now compiled with Ubuntu 24.04 instead of 26.04
-* level layout
-* license added no AI/LLM clause
-* added Templates for less code repetition
+* New folder structure
+* Linux version ships as .tar now 
+* More explainative README
 ### Fixed
+* linux version now ships with run permissions

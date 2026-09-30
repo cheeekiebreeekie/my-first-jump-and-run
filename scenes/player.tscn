@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b3r62i7l186q7" path="res://assets/images/icon.svg" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://xj241hfjh477" path="res://assets/shaders/pixelation.gdshader" id="2_g2els"]
 [ext_resource type="Script" uid="uid://b8tsthoclxq26" path="res://scripts/camera_2d.gd" id="2_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://cfu60boabltbf" path="res://assets/menus/pause/pause_menu.tscn" id="3_dqkch"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qhqgy"]
 shader = ExtResource("2_g2els")
@@ -34,6 +35,8 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="VelocityLabelX" type="Label" parent="Camera2D" unique_id=2036476389]
 offset_left = 555.0
@@ -111,6 +114,46 @@ offset_bottom = 417.0
 theme_override_font_sizes/font_size = 40
 text = "Stomp"
 
+[node name="pauseMenu" parent="Camera2D" unique_id=850946275 node_paths=PackedStringArray("player") instance=ExtResource("3_dqkch")]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 20
+custom_minimum_size = Vector2(1920, 1080)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+player = NodePath("../..")
+
+[node name="MarginContainer" parent="Camera2D/pauseMenu" index="0"]
+z_index = 10
+propagate_maximum_size = false
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="VBoxContainer" parent="Camera2D/pauseMenu/MarginContainer" index="0"]
+z_index = 10
+propagate_maximum_size = false
+mouse_filter = 2
+mouse_behavior_recursive = 1
+alignment = 1
+
+[node name="Resume" parent="Camera2D/pauseMenu/MarginContainer/VBoxContainer" index="0"]
+z_index = 10
+mouse_behavior_recursive = 2
+keep_pressed_outside = true
+
+[node name="Exit" parent="Camera2D/pauseMenu/MarginContainer/VBoxContainer" index="1"]
+propagate_maximum_size = true
+mouse_behavior_recursive = 2
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=920356946]
 polygon = PackedVector2Array(64, -52, 64, 52, 63, 56, 60, 60, 56, 63, 52, 64, -52, 64, -56, 63, -60, 60, -63, 56, -64, 52, -64, -52, -63, -56, -60, -60, -56, -63, -52, -64, 52, -64, 56, -63, 60, -60, 63, -56)
 
@@ -118,3 +161,7 @@ polygon = PackedVector2Array(64, -52, 64, 52, 63, 56, 60, 60, 56, 63, 52, 64, -5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=356872881]
 polygon = PackedVector2Array(64, -52, 64, 52, 63, 56, 60, 60, 56, 63, 52, 64, -52, 64, -56, 63, -60, 60, -63, 56, -64, 52, -64, -52, -63, -56, -60, -60, -56, -63, -52, -64, 52, -64, 56, -63, 60, -60, 63, -56)
+
+[connection signal="pressed" from="Camera2D/pauseMenu/MarginContainer/VBoxContainer/Resume" to="Camera2D/pauseMenu/MarginContainer/VBoxContainer/Resume" method="_on_pressed"]
+
+[editable path="Camera2D/pauseMenu"]

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c7e6tt22rde2a"]
 
 [ext_resource type="PackedScene" uid="uid://drajm3wmsbnvv" path="res://scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dl1jtj0y6u7w0" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dww0w3j58sio2" path="res://scenes/level1.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://11glu3c318m0" path="res://scenes/main.gd" id="1_sugp2"]
 [ext_resource type="Shader" uid="uid://df58cdkpo4ud6" path="res://assets/shaders/levelloadtransition.gdshader" id="4_jyhfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
@@ -11,7 +11,7 @@ shader_parameter/progress = 0.0
 shader_parameter/grid_size = Vector2(32, 18)
 
 [node name="main" type="Node2D" unique_id=623931325]
-script = ExtResource("1_sugp2")
+script = ExtResource("1_jyhfs")
 
 [node name="level1" parent="." unique_id=1112543401 instance=ExtResource("1_o5qli")]
 
@@ -24,6 +24,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="Player" parent="." unique_id=1732272226 instance=ExtResource("1_ig7tw")]
 visibility_layer = 524289

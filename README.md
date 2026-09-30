@@ -15,6 +15,10 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
 * **Engine:** Godot 4.X
 * **Language:** GDScript, C++20
 
+## Requirements
+
+* **Linux:** Requires a terminal emulator supporting the `-e` flag (e.g., `alacritty`, `kitty`, `konsole`, or `xterm`).
+
 ## License
 
 Slightly changed **PolyForm Noncommercial License 1.0.0**, allowing for monetization of video content
