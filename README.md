@@ -21,4 +21,4 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
 
 ## License
 
-* Slightly changed **PolyForm Noncommercial License 1.0.0**, allowing for monetization of video content
+* Slightly changed **PolyForm Noncommercial License 1.0.0** ([LICENSE](https://github.com/cheeekiebreeekie/my-first-jump-and-run/tree/Dev?tab=License-1-ov-file))
