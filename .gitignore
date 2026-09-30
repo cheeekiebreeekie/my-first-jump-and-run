@@ -43,6 +43,7 @@ cache/
 *.x86_64
 *.exe
 *.pck
+*.a
 
 # Gprof output
 gmon.out
