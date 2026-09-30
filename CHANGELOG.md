@@ -1,12 +1,13 @@
 # Changelog
-## [v0.2.2] - 01.10.2026
+## [v0.2.2] - 30.09.2026
 
 ### Added
-* launcher executable
+* Launcher executable
 * Binary checks
 ### Changed
 * New folder structure
 * Linux version ships as .tar now 
 * More explainative README
+* Cleaned up GitHub Repository
 ### Fixed
 * linux version now ships with run permissions
