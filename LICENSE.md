@@ -135,5 +135,7 @@ content creators (such as YouTubers and Twitch streamers) are permitted
 to monetize video content, live streams, and reviews featuring gameplay 
 or footage of software built using this code, provided they include proper attribution.
 
-
-Rights Reserved for Text and Data Mining: Pursuant to Article 4(3) of EU Directive 2019/790 and § 44b UrhG, text and data mining, scraping, and training of AI/LLM models on this repository are strictly prohibited.
+## TDM Use
+Rights Reserved for Text and Data Mining: Pursuant to Article 4(3) of EU Directive 
+2019/790 and § 44b UrhG, text and data mining, scraping, and training of AI/LLM 
+models on this repository are strictly prohibited.
