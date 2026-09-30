@@ -4,6 +4,7 @@
 .godot/
 /gen/
 /__pycache__/
+!.gitkeep
 
 # Godot 3.x ignores
 include/gen

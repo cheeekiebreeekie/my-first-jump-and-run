@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <filesystem>
-#include <vector>
 
 namespace fs = std::filesystem;
 
@@ -27,6 +26,7 @@ void ensure_terminal(int argc, char* argv[]) {
 #include <spawn.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <vector>
 
 extern char** environ;
 
