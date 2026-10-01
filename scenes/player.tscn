@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://xj241hfjh477" path="res://assets/shaders/pixelation.gdshader" id="2_g2els"]
 [ext_resource type="Script" uid="uid://b8tsthoclxq26" path="res://scripts/camera_2d.gd" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://cfu60boabltbf" path="res://assets/menus/pause/pause_menu.tscn" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://dkh3mhqy8rnys" path="res://scripts/F3_toggle_label_visibility.gd" id="4_qlg0r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qhqgy"]
 shader = ExtResource("2_g2els")
@@ -15,7 +16,6 @@ shader_parameter/target_resolution = Vector2(320, 180)
 texture = ExtResource("1_4flbx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1623786422 node_paths=PackedStringArray("player")]
-position = Vector2(0, -180)
 script = ExtResource("2_qhqgy")
 player = NodePath("..")
 
@@ -39,22 +39,27 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 
 [node name="VelocityLabelX" type="Label" parent="Camera2D" unique_id=2036476389]
+visible = false
 offset_left = 555.0
 offset_top = 64.0
 offset_right = 858.0
 offset_bottom = 119.0
 theme_override_font_sizes/font_size = 40
 text = "Velocity: "
+script = ExtResource("4_qlg0r")
 
 [node name="VelocityLabelY" type="Label" parent="Camera2D" unique_id=128690072]
+visible = false
 offset_left = 553.0
 offset_top = 2.0
 offset_right = 856.0
 offset_bottom = 57.0
 theme_override_font_sizes/font_size = 40
 text = "Velocity: "
+script = ExtResource("4_qlg0r")
 
 [node name="MediumLabel" type="Label" parent="Camera2D" unique_id=835188462]
+visible = false
 offset_left = 278.0
 offset_top = -522.0
 offset_right = 628.0
@@ -62,30 +67,37 @@ offset_bottom = -409.0
 theme_override_font_sizes/font_size = 40
 text = "Medium:
 "
+script = ExtResource("4_qlg0r")
 
 [node name="CurrentDensityLabel" type="Label" parent="Camera2D" unique_id=1015099163]
+visible = false
 offset_left = 280.0
 offset_top = -472.0
 offset_right = 607.0
 offset_bottom = -417.0
 theme_override_font_sizes/font_size = 40
 text = "Current Density: "
+script = ExtResource("4_qlg0r")
 
 [node name="GravityForceLabel" type="Label" parent="Camera2D" unique_id=917463318]
+visible = false
 offset_left = 278.0
 offset_top = -411.0
 offset_right = 551.0
 offset_bottom = -356.0
 theme_override_font_sizes/font_size = 40
 text = "Vertical Force:"
+script = ExtResource("4_qlg0r")
 
 [node name="BuoyancyLabel" type="Label" parent="Camera2D" unique_id=1302038627]
+visible = false
 offset_left = 283.0
 offset_top = -347.0
 offset_right = 468.0
 offset_bottom = -292.0
 theme_override_font_sizes/font_size = 40
 text = "Buyoncy: "
+script = ExtResource("4_qlg0r")
 
 [node name="DashLabel" type="Label" parent="Camera2D" unique_id=610582657]
 offset_left = 551.0
@@ -96,6 +108,7 @@ theme_override_font_sizes/font_size = 40
 text = "Dash
 "
 horizontal_alignment = 2
+script = ExtResource("4_qlg0r")
 
 [node name="DoubleJumpLabel" type="Label" parent="Camera2D" unique_id=1170316335]
 offset_left = 565.0
@@ -105,6 +118,7 @@ offset_bottom = 520.0
 theme_override_font_sizes/font_size = 40
 text = "DoubleJump
 "
+script = ExtResource("4_qlg0r")
 
 [node name="StompLabel" type="Label" parent="Camera2D" unique_id=1307794555]
 offset_left = 566.0
@@ -113,19 +127,100 @@ offset_right = 869.0
 offset_bottom = 417.0
 theme_override_font_sizes/font_size = 40
 text = "Stomp"
+script = ExtResource("4_qlg0r")
 
-[node name="pauseMenu" parent="Camera2D" unique_id=850946275 node_paths=PackedStringArray("player") instance=ExtResource("3_dqkch")]
+[node name="pauseMenu" parent="Camera2D" unique_id=850946275 node_paths=PackedStringArray("exitButton", "resumeButton", "player") instance=ExtResource("3_dqkch")]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 20
 custom_minimum_size = Vector2(1920, 1080)
 mouse_filter = 2
 mouse_behavior_recursive = 1
+exitButton = NodePath("GridContainer/ExitButton")
+resumeButton = NodePath("GridContainer/ResumeButton")
 player = NodePath("../..")
 
-[node name="MarginContainer" parent="Camera2D/pauseMenu" index="0"]
+[node name="GridContainer" type="Control" parent="Camera2D/pauseMenu" unique_id=413899709]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ResumeButton" type="Button" parent="Camera2D/pauseMenu/GridContainer" unique_id=488220009]
+unique_name_in_owner = true
 z_index = 10
-propagate_maximum_size = false
+layout_mode = 0
+offset_left = 855.0
+offset_top = 480.0
+offset_right = 1065.0
+offset_bottom = 528.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Resume
+"
+
+[node name="SettingsButton" type="Button" parent="Camera2D/pauseMenu/GridContainer" unique_id=1007086851]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 552.0
+offset_right = 1065.0
+offset_bottom = 600.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Settings
+"
+
+[node name="SaveButton" type="Button" parent="Camera2D/pauseMenu/GridContainer" unique_id=533260168]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 624.0
+offset_right = 1065.0
+offset_bottom = 672.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="Camera2D/pauseMenu/GridContainer" unique_id=146872401]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 696.0
+offset_right = 1065.0
+offset_bottom = 744.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Load
+"
+
+[node name="ExitButton" type="Button" parent="Camera2D/pauseMenu/GridContainer" unique_id=160047611]
+unique_name_in_owner = true
+propagate_maximum_size = true
+layout_mode = 0
+offset_left = 855.0
+offset_top = 768.0
+offset_right = 1065.0
+offset_bottom = 816.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Exit
+"
+
+[node name="MarginContainer" parent="Camera2D/pauseMenu" index="1"]
+visible = false
+z_index = 10
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
@@ -139,6 +234,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 
 [node name="VBoxContainer" parent="Camera2D/pauseMenu/MarginContainer" index="0"]
+visible = false
 z_index = 10
 propagate_maximum_size = false
 mouse_filter = 2
@@ -146,11 +242,13 @@ mouse_behavior_recursive = 1
 alignment = 1
 
 [node name="Resume" parent="Camera2D/pauseMenu/MarginContainer/VBoxContainer" index="0"]
+visible = false
 z_index = 10
 mouse_behavior_recursive = 2
 keep_pressed_outside = true
 
 [node name="Exit" parent="Camera2D/pauseMenu/MarginContainer/VBoxContainer" index="1"]
+visible = false
 propagate_maximum_size = true
 mouse_behavior_recursive = 2
 
@@ -162,6 +260,9 @@ polygon = PackedVector2Array(64, -52, 64, 52, 63, 56, 60, 60, 56, 63, 52, 64, -5
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=356872881]
 polygon = PackedVector2Array(64, -52, 64, 52, 63, 56, 60, 60, 56, 63, 52, 64, -52, 64, -56, 63, -60, 60, -63, 56, -64, 52, -64, -52, -63, -56, -60, -60, -56, -63, -52, -64, 52, -64, 56, -63, 60, -60, 63, -56)
 
+[connection signal="pressed" from="Camera2D/pauseMenu/GridContainer/ResumeButton" to="Camera2D/pauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Camera2D/pauseMenu/GridContainer/ResumeButton" to="Camera2D/pauseMenu/GridContainer/ResumeButton" method="_on_pressed"]
+[connection signal="pressed" from="Camera2D/pauseMenu/GridContainer/ExitButton" to="Camera2D/pauseMenu" method="_on_exit_pressed"]
 [connection signal="pressed" from="Camera2D/pauseMenu/MarginContainer/VBoxContainer/Resume" to="Camera2D/pauseMenu/MarginContainer/VBoxContainer/Resume" method="_on_pressed"]
 
 [editable path="Camera2D/pauseMenu"]

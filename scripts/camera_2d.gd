@@ -7,8 +7,34 @@ extends Camera2D
 @export var default_zoom: Vector2 = Vector2(1.0, 1.0)
 @export var max_zoom: Vector2 = Vector2(0.5, 0.5)
 @export var zoom_speed: float = 8.0
+@export var camera_scale: Vector2 = Vector2(1, 1)
+
 @onready var color_rect: ColorRect = $ColorRect
+@onready var color_rect_position = color_rect.position
+
 @onready var pause_Menu: pause_menu = $pauseMenu
+@onready var pause_Menu_position = pause_Menu.position
+
+@onready var resume: Button = %ResumeButton
+@onready var resume_base_size = resume.size
+@onready var resume_position = resume.position
+
+@onready var settings: Button = %SettingsButton
+@onready var settings_base_size = settings.size
+@onready var settings_position = settings.position
+
+@onready var save: Button = %SaveButton
+@onready var save_base_size = save.size 
+@onready var save_position = save.position
+
+@onready var load_: Button = %LoadButton
+@onready var load_base_size = load_.size
+@onready var load_position = load_.position
+
+@onready var exit: Button = %ExitButton
+@onready var exit_base_size = exit.size
+@onready var exit_position = exit.position
+
 @onready var base_size: Vector2 = color_rect.size
 
 var is_zoom: bool = true
@@ -59,8 +85,12 @@ func _process(delta: float) -> void:
 		zoom = zoom.lerp(default_zoom, zoom_speed*delta)
 
 	if color_rect:
-		var target_size = base_size / zoom
-		color_rect.size = target_size
-		pause_Menu.size = target_size
-		pause_Menu.position = -target_size / 2.0
-		color_rect.position = -target_size / 2.0
+
+		camera_scale = Vector2(1, 1) / zoom
+
+		color_rect.scale = camera_scale
+		pause_Menu.scale = camera_scale
+
+		color_rect.position = color_rect_position * camera_scale
+
+		pause_Menu.position = pause_Menu_position * camera_scale
