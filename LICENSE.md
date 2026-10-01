@@ -105,6 +105,35 @@ any warranty or condition, and the licensor will not be liable
 to you for any damages arising out of these terms or the use
 or nature of the software, under any kind of legal claim.***
 
+## Streaming and Content Creation Exception
+Notwithstanding the non-commercial restrictions of this license, 
+content creators (such as YouTubers and Twitch streamers) are permitted 
+to monetize video content, live streams, and reviews featuring gameplay 
+or footage of software built using this code, provided they include 
+proper attribution.
+
+## Text and Data Mining (TDM) & AI Restrictions
+**Reservation of Rights:** Pursuant to Article 4(3) of EU Directive 2019/790 
+and § 44b(3) UrhG, the licensor expressly reserves all rights regarding the 
+extraction, collection, scraping, or mining of the software or any of its 
+constituent assets.
+
+**Prohibited AI & Mining Activities:** Without explicit prior written consent 
+from the licensor, you may not use any part of the software (including code, 
+pixel art, graphics, audio, and level design) for:
+
+1. Text and data mining (TDM), automated web scraping, data extraction, 
+or web crawling.
+2. Development, training, fine-tuning, alignment, testing, or evaluation of 
+artificial intelligence (AI), machine learning (ML), 
+or large language/multimodal models (LLMs/LMMs).
+3. Creation of embeddings, vectors for Retrieval-Augmented Generation (RAG), 
+datasets, or synthetic data.
+
+**Machine-Readable Reservation Signals:** In accordance with Article 4(3) 
+of EU Directive 2019/790, machine-readable opt-out signals and reservation
+policies are made available at [tdmrep.json](https://github.com/cheeekiebreeekie/my-first-jump-and-run/blob/Dev/.well-known/tdmrep.json) and [robots.txt](https://github.com/cheeekiebreeekie/my-first-jump-and-run/blob/Dev/robots.txt)
+
 ## Definitions
 
 The **licensor** is the individual or entity offering these
@@ -129,13 +158,3 @@ software under these terms.
 **Use** means anything you do with the software requiring one
 of your licenses.
 
-## Streaming and Content Creation Exception
-Notwithstanding the non-commercial restrictions of this license, 
-content creators (such as YouTubers and Twitch streamers) are permitted 
-to monetize video content, live streams, and reviews featuring gameplay 
-or footage of software built using this code, provided they include proper attribution.
-
-## TDM Use
-Rights Reserved for Text and Data Mining: Pursuant to Article 4(3) of EU Directive 
-2019/790 and § 44b UrhG, text and data mining, scraping, and training of AI/LLM 
-models on this repository are strictly prohibited.
