@@ -37,7 +37,6 @@ func _start_level_transition(target_level_path: String) -> void:
 	add_child(new_level)
 	move_child(new_level, 0)
 
-	camera.inputs_enabled = true
 	$Player.global_position = Vector2(0, -64)
 
 	var tween_out = create_tween()
@@ -45,6 +44,7 @@ func _start_level_transition(target_level_path: String) -> void:
 	await tween_out.finished
 
 	$Player.set_physics_process(true)
+	camera.inputs_enabled = true
 	pause_Menu.run = true
 
 	if camera and "is_zoom" in camera:
