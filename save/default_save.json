@@ -1,0 +1,12 @@
+{
+    "level": 1,
+    "density": 0,
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "velocity": {
+        "x": 0,
+        "y": 0
+    }
+}

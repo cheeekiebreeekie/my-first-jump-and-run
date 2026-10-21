@@ -7,6 +7,26 @@ class_name pause_menu extends Control
 var run : bool = true;
 var ui_enabled : bool = false
 var camera
+@export var camera_scale: Vector2 = Vector2(1, 1)
+@export var default_zoom: Vector2 = Vector2(1.0, 1.0)
+
+@onready var color_rect: ColorRect = $"../Player/Camera2D/ColorRect"
+@onready var color_rect_position = color_rect.position
+
+@onready var pause_Menu: pause_menu = %pauseMenu
+@onready var pause_Menu_position = pause_Menu.position
+
+@onready var resume: Button = %ResumeButton
+
+@onready var settings: Button = %SettingsButton
+
+@onready var save: Button = %SaveButton
+
+@onready var load_: Button = %LoadButton
+
+@onready var exit: Button = %ExitButton
+
+@onready var base_size: Vector2 = color_rect.size
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,9 +35,16 @@ func _ready() -> void:
 	disableUI()
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	if color_rect:
+
+		camera_scale = Vector2(1, 1) / camera.zoom
+
+		pause_Menu.scale = camera_scale
+
+		pause_Menu.position = camera.global_position - (pause_Menu.size / 2) * camera_scale
 
 
 func _input(event):
@@ -65,3 +92,16 @@ func _on_exit_pressed() -> void:
 
 func _on_resume_button_down() -> void:
 	pass # Replace with function body.
+
+func _on_save_pressed() -> void:
+	save_manager.save_game(
+		get_tree().get_first_node_in_group("level").scene_file_path,
+		player.get_character_material(), 
+		player.global_position, 
+		player.velocity
+		)
+	disableUI()
+
+func _on_load_pressed() -> void:
+	disableUI()
+	save_manager.load_game()

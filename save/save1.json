@@ -1,0 +1,12 @@
+{
+	"density": "aerogel",
+	"level": "res://scenes/level1.tscn",
+	"position": {
+		"x": -723.122314453125,
+		"y": -64.0414733886719
+	},
+	"velocity": {
+		"x": 0.0,
+		"y": 0.0
+	}
+}

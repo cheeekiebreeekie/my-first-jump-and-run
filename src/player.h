@@ -9,6 +9,7 @@
 #include <string_view>
 #include <vector>
 #include <format>
+#include <algorithm>
 
 #include <godot_cpp/classes/project_settings.hpp>
 
@@ -48,7 +49,7 @@ private:
     inline static const double aerogel_density = 0.000002;
     inline static const double concrete_density = 0.0024;
     std::vector<double> density_vector = {oak_density, concrete_density, aerogel_density};
-    double character_density = density_vector[0];
+    std::vector<std::string> density_names = {"oak", "concrete", "aerogel"};
 
     //friction variables
     double friction_coefficient = 0.0;
@@ -63,7 +64,7 @@ private:
     //density and mass variables
     double density_height_scale = 850000.0;
     double character_size = 1.0;
-    double character_mass = character_size * character_density;
+    double character_mass;
 
     //gravity settings, should be 981px/s²
     double surface_gravity = 981.0;
@@ -79,10 +80,8 @@ private:
     double damping_ratio = 0.2;
 
     //abilities
-    bool can_jump = true;
     double jump_timer = 0.0;
     bool can_double_jump = true;
-    bool can_dash = true;
     double dash_timer = 0.0;
     bool can_downward_dash = true;
 
@@ -91,9 +90,26 @@ protected:
     static void _bind_methods();
 
 public:
-    Area2D* _get_label(String path_to_node);
     void _ready() override;
     void _physics_process(double delta) override;
+
+    double get_character_density() const {
+        return density_vector[current_density_index];
+    }
+
+    String get_character_material() const {
+        return String(density_names[current_density_index].c_str());
+    }
+
+    void set_character_material(const String &name){
+        std::string std_name = name.utf8().get_data();
+        std::vector<std::string>::iterator density = std::find(density_names.begin(), density_names.end(), std_name);
+        if (density != density_names.end()) {
+            current_density_index = static_cast<int>(std::distance(density_names.begin(), density));
+        } else {
+            ERR_PRINT(vformat("Unknown material: %s", name));
+        }
+    }
 
     template <typename T> 
     T* _get_Node(const NodePath &path_to_node){
@@ -101,7 +117,7 @@ public:
             return node;
         }
         ERR_PRINT("FAILED TO GET NODE AT PATH: " + String(path_to_node));
-        return memnew(T);
+        return nullptr;
     }
 
     template <typename... T1>

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dl1jtj0y6u7w0" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dww0w3j58sio2" path="res://scenes/level1.tscn" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://df58cdkpo4ud6" path="res://assets/shaders/levelloadtransition.gdshader" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://b4utvpgojwrwi" path="res://pause_menu.tscn" id="5_tbgi4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
 shader = ExtResource("4_jyhfs")
@@ -30,3 +31,13 @@ mouse_behavior_recursive = 1
 [node name="Player" parent="." unique_id=1732272226 instance=ExtResource("1_ig7tw")]
 visibility_layer = 524289
 position = Vector2(-1, -83)
+
+[node name="pauseMenu" parent="." unique_id=1994078621 node_paths=PackedStringArray("player") instance=ExtResource("5_tbgi4")]
+player = NodePath("../Player")
+camera_scale = null
+default_zoom = null
+
+[connection signal="pressed" from="pauseMenu/GridContainer/SaveButton" to="pauseMenu" method="_on_save_pressed"]
+[connection signal="pressed" from="pauseMenu/GridContainer/LoadButton" to="pauseMenu" method="_on_load_pressed"]
+
+[editable path="pauseMenu"]

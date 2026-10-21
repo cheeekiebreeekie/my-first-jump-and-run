@@ -42,12 +42,13 @@ Player::~Player(){
 }
 
 void Player::_bind_methods(){
-
+    ClassDB::bind_method(D_METHOD("set_character_material", "name"), &Player::set_character_material);
+    ClassDB::bind_method(D_METHOD("get_character_material"), &Player::get_character_material);
 }
 
 void Player::_ready(){
 
-
+    character_mass = character_size * get_character_density();
 
     //import project gravity settings
     ProjectSettings *settings = ProjectSettings::get_singleton();
@@ -110,7 +111,7 @@ void Player::_physics_process(double delta) {
 
     //calculate character mass, calculated like a cuboid
     character_size = horizontal_sprite_width * horizontal_sprite_width * vertical_sprite_width;
-    character_mass = character_size * character_density;
+    character_mass = character_size * get_character_density();
     ////////////////////////////////////////////////////////////////////
 
     //gravity force
@@ -144,9 +145,13 @@ void Player::_physics_process(double delta) {
         }
         character_bottom = static_cast<double>(get_global_position().y) + (vertical_sprite_width * 0.5);
 
-        CollisionShape2D *area_shape_node = top_z_level_area -> get_node<CollisionShape2D>(NodePath("CollisionShape2D"));
+        CollisionShape2D *area_shape_node = nullptr;
 
-        if (area_shape_node) {
+        if (top_z_level_area != nullptr){
+            area_shape_node = top_z_level_area -> get_node<CollisionShape2D>(NodePath("CollisionShape2D"));
+        }
+
+        if (area_shape_node != nullptr) {
             Ref<RectangleShape2D> area_shape = Object::cast_to<RectangleShape2D>(area_shape_node->get_shape().ptr());
         
             //get submersion percent
@@ -343,7 +348,6 @@ void Player::_physics_process(double delta) {
     //switch density
     if (Input::get_singleton()->is_action_just_pressed("r")) {
         current_density_index = (current_density_index + 1) % density_vector.size();
-        character_density = density_vector[current_density_index];
     }
     ////////////////////////////////////////////////////////////////////
 

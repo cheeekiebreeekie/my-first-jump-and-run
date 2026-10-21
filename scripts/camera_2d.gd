@@ -12,31 +12,6 @@ extends Camera2D
 @onready var color_rect: ColorRect = $ColorRect
 @onready var color_rect_position = color_rect.position
 
-@onready var pause_Menu: pause_menu = $pauseMenu
-@onready var pause_Menu_position = pause_Menu.position
-
-@onready var resume: Button = %ResumeButton
-@onready var resume_base_size = resume.size
-@onready var resume_position = resume.position
-
-@onready var settings: Button = %SettingsButton
-@onready var settings_base_size = settings.size
-@onready var settings_position = settings.position
-
-@onready var save: Button = %SaveButton
-@onready var save_base_size = save.size 
-@onready var save_position = save.position
-
-@onready var load_: Button = %LoadButton
-@onready var load_base_size = load_.size
-@onready var load_position = load_.position
-
-@onready var exit: Button = %ExitButton
-@onready var exit_base_size = exit.size
-@onready var exit_position = exit.position
-
-@onready var base_size: Vector2 = color_rect.size
-
 var is_zoom: bool = true
 var inputs_enabled: bool = true
 
@@ -48,6 +23,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 
+	
 
 	if not player:
 		return
@@ -89,8 +65,5 @@ func _process(delta: float) -> void:
 		camera_scale = Vector2(1, 1) / zoom
 
 		color_rect.scale = camera_scale
-		pause_Menu.scale = camera_scale
 
 		color_rect.position = color_rect_position * camera_scale
-
-		pause_Menu.position = pause_Menu_position * camera_scale

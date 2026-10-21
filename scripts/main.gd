@@ -1,25 +1,43 @@
 extends Node2D
 
 @onready var level_load_transition_rect: ColorRect = $LevelLoadTransition/ColorRect
-@onready var pause_Menu : pause_menu = get_node("Player/Camera2D/pauseMenu")
+@onready var pause_Menu : pause_menu = %pauseMenu
+@onready var tween_speed : float
 
-func _start_level_transition(target_level_path: String) -> void:
+func _start_level_transition(
+	target_level_path: String, 
+	density : String = "oak",
+	pos : Vector2 = Vector2(0, -64), 
+	vel : Vector2 = Vector2(0, 0), 
+	is_load: bool = false) -> void:
 	var shader_material = level_load_transition_rect.material as ShaderMaterial
+
+	if is_load:
+		tween_speed = 0.5
+	else:
+		tween_speed = 2.4 
+
 	if not shader_material:
 		push_error("No ShaderMaterial found on ColorRect!")
 		return
 
 	var camera = get_viewport().get_camera_2d()
-
-	if camera and "is_zoom" in camera:
-		camera.is_zoom = false
+	if camera && "is_zoom" in camera:
+		if !is_load:
+			camera.is_zoom = false
+		else:
+			camera.is_zoom = true
+			camera.set_process(false)
+			camera.position = Vector2(0, 0);
 
 	ResourceLoader.load_threaded_request(target_level_path)
 
 	var tween_in = create_tween()
-	tween_in.tween_property(shader_material, "shader_parameter/progress", 1.0, 2.4)
+	tween_in.tween_property(shader_material, "shader_parameter/progress", 1.0, tween_speed)
 	#pause actions
-	$Player.velocity = Vector2.ZERO
+
+	$Player.velocity = vel
+
 	$Player.set_physics_process(false)
 	pause_Menu.run = false
 	camera.inputs_enabled = false
@@ -37,10 +55,11 @@ func _start_level_transition(target_level_path: String) -> void:
 	add_child(new_level)
 	move_child(new_level, 0)
 
-	$Player.global_position = Vector2(0, -64)
+	$Player.global_position = pos
+	$Player.set_character_material(density)
 
 	var tween_out = create_tween()
-	tween_out.tween_property(shader_material, "shader_parameter/progress", 0.0, 1.2)
+	tween_out.tween_property(shader_material, "shader_parameter/progress", 0.0, 0.5 * tween_speed)
 	await tween_out.finished
 
 	$Player.set_physics_process(true)
@@ -49,3 +68,4 @@ func _start_level_transition(target_level_path: String) -> void:
 
 	if camera and "is_zoom" in camera:
 		camera.is_zoom = true
+		camera.set_process(true)
