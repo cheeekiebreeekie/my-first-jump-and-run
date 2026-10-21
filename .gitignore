@@ -9,6 +9,7 @@
 # Godot 3.x ignores
 include/gen
 src/gen
+/save/
 
 # Build configuration.
 /custom.py
