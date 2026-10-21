@@ -94,12 +94,22 @@ func _on_resume_button_down() -> void:
 	pass # Replace with function body.
 
 func _on_save_pressed() -> void:
+	print("pause_menu: save pressed")
+	var level := get_tree().get_first_node_in_group("level")
+	if level == null:
+		print("No node in group 'level'")
+		return
+	print("pause_menu: level path = ", level.scene_file_path)
+	print("pause_menu: calling save")
+	print("pause_menu: autoload = ", save_manager)
+	print("pause_menu: script = ", save_manager.get_script().resource_path)
 	save_manager.save_game(
-		get_tree().get_first_node_in_group("level").scene_file_path,
+		level.scene_file_path,
 		player.get_character_material(), 
 		player.global_position, 
 		player.velocity
-		)
+	)
+	print("pause_menu: returned from save")
 	disableUI()
 
 func _on_load_pressed() -> void:

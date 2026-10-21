@@ -34,8 +34,6 @@ position = Vector2(-1, -83)
 
 [node name="pauseMenu" parent="." unique_id=1994078621 node_paths=PackedStringArray("player") instance=ExtResource("5_tbgi4")]
 player = NodePath("../Player")
-camera_scale = null
-default_zoom = null
 
 [connection signal="pressed" from="pauseMenu/GridContainer/SaveButton" to="pauseMenu" method="_on_save_pressed"]
 [connection signal="pressed" from="pauseMenu/GridContainer/LoadButton" to="pauseMenu" method="_on_load_pressed"]

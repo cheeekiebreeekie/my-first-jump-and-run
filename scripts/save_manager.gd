@@ -13,8 +13,11 @@ func get_save_dir() -> String:
 	return base.path_join(SAVE_PATH)
 
 func save_game(level: String, density: String, pos: Vector2, vel: Vector2) -> void:
+	print("save_game entered")
+	print("save_game: dir = ", get_save_dir())
 	var dir:= get_save_dir()
-	DirAccess.make_dir_recursive_absolute(dir)
+	var err := DirAccess.make_dir_recursive_absolute(dir)
+	print("save_game: make_dir err = ", err)
 	var data := {
 		"level": level,
 		"density": density,
@@ -27,11 +30,15 @@ func save_game(level: String, density: String, pos: Vector2, vel: Vector2) -> vo
 			"y": vel.y
 		}
 	}
+	var path := dir.path_join("save" + "1" + SAVE_TYPE)
+	print("save_game: writing to ", path)
 	var file := FileAccess.open(dir.path_join("save" + "1" + SAVE_TYPE), FileAccess.WRITE)
 	if file == null:
+		print("save_game: open failed, error = ", FileAccess.get_open_error())
 		push_error("Could not write save file (ERROR %d" % FileAccess.get_open_error())
 		return
 	file.store_string(JSON.stringify(data, "\t"))
+	print("save_game: done")
 
 func load_game() -> void:
 	var level_root := get_tree().current_scene
