@@ -19,7 +19,7 @@ func _start_level_transition(
 	var shader_material = level_load_transition_rect.material as ShaderMaterial
 
 	if is_load:
-		tween_speed = 0.25
+		tween_speed = 0.05
 	else:
 		tween_speed = 2.4 
 

@@ -54,6 +54,7 @@ func load_game() -> void:
 	var data = JSON.parse_string(file.get_as_text())
 	if data == null:
 		return
+
 	var level := String(data["level"])
 	var density := String(data["density"])
 	var pos := Vector2(data["position"]["x"], data["position"]["y"])
@@ -62,4 +63,5 @@ func load_game() -> void:
 	var can_double_jump : bool = data["can_double_jump"]
 	var can_downward_dash : bool = data["can_downward_dash"]
 	var dash_timer : float = data["dash_timer"]
+	
 	await level_root._start_level_transition(level, density, pos, vel, jump_timer, can_double_jump, can_downward_dash, dash_timer, true)
