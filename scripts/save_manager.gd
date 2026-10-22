@@ -14,6 +14,7 @@ func get_save_dir() -> String:
 
 func save_game(level: String, density: String, pos: Vector2, vel: Vector2) -> void:
 	var dir:= get_save_dir()
+	DirAccess.make_dir_recursive_absolute(dir)
 	var data := {
 		"level": level,
 		"density": density,
