@@ -97,14 +97,19 @@ func _on_save_pressed() -> void:
 	var level := get_tree().get_first_node_in_group("level")
 	if level == null:
 		return
-	save_manager.save_game(
+	await save_manager.save_game(
 		level.scene_file_path,
 		player.get_character_material(), 
 		player.global_position, 
-		player.velocity
+		player.velocity,
+		player.get_jump_timer(),
+		player.get_can_double_jump(),
+		player.get_can_downward_dash(),
+		player.get_dash_timer()
 	)
 	disableUI()
 
 func _on_load_pressed() -> void:
+	await save_manager.load_game()
 	disableUI()
-	save_manager.load_game()
+

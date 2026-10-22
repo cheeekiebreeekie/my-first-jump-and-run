@@ -84,6 +84,7 @@ private:
     bool can_double_jump = true;
     double dash_timer = 0.0;
     bool can_downward_dash = true;
+    double floor_detection_timeout = 0.0;
 
 
 protected:
@@ -93,6 +94,8 @@ public:
     void _ready() override;
     void _physics_process(double delta) override;
 
+    //getters
+    //getters for density and material names
     double get_character_density() const {
         return density_vector[current_density_index];
     }
@@ -101,7 +104,7 @@ public:
         return String(density_names[current_density_index].c_str());
     }
 
-    void set_character_material(const String &name){
+    void set_character_material(const String &name) {
         std::string std_name = name.utf8().get_data();
         std::vector<std::string>::iterator density = std::find(density_names.begin(), density_names.end(), std_name);
         if (density != density_names.end()) {
@@ -110,7 +113,58 @@ public:
             ERR_PRINT(vformat("Unknown material: %s", name));
         }
     }
+    ////////////////////////////////////////////////////////////////////
+    //getters for abilities + jump
+    double get_jump_timer() const {
+        return jump_timer;
+    }
+    bool get_can_double_jump() const {
+        return can_double_jump;
+    }
+    bool get_can_downward_dash() const {
+        return can_downward_dash;
+    }
+    double get_dash_timer() const {
+        return dash_timer;
+    }
+    ////////////////////////////////////////////////////////////////////
+    //setters for abilities + jump
+    void set_jump_timer(const double &jump_timer_set) {
+        jump_timer = jump_timer_set;
+        if (jump_timer > 0) {
+            Color color = double_jump_label->get_modulate();
+            color.a = 0.5;
+            double_jump_label->set_modulate(color);
+        }
+    }
+    void set_can_double_jump(const bool &can_double_jump_set) {
+        can_double_jump = can_double_jump_set;
+        if (!can_double_jump) {
+            Color color = double_jump_label->get_modulate();
+            color.a = 0.5;
+            double_jump_label->set_modulate(color);
+        }
+    }
+    void set_can_downward_dash(const bool &can_downward_dash_set) {
+        can_downward_dash = can_downward_dash_set;
+        if (!can_downward_dash) {
+            Color color = stomp_label->get_modulate();
+            color.a = 0.5;
+            stomp_label->set_modulate(color);
+        }
+    }
+    void set_dash_timer(const double &dash_timer_set) {
+        dash_timer = dash_timer_set;
+        if (dash_timer > 0) {
+            Color color = dash_label->get_modulate();
+            color.a = 0.5;
+            dash_label->set_modulate(color);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
 
+    //
     template <typename T> 
     T* _get_Node(const NodePath &path_to_node){
         if (T *node = get_node<T>(path_to_node)) {

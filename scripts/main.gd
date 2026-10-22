@@ -5,11 +5,16 @@ extends Node2D
 @onready var tween_speed : float
 
 func _start_level_transition(
-	target_level_path: String, 
+	target_level_path: String,
 	density : String = "oak",
-	pos : Vector2 = Vector2(0, -64), 
-	vel : Vector2 = Vector2(0, 0), 
-	is_load: bool = false) -> void:
+	pos : Vector2 = Vector2(0, -64),
+	vel : Vector2 = Vector2(0, 0),
+	jump_timer : float = 0.0,
+	can_double_jump : bool = true,
+	can_downward_dash : bool = true,
+	dash_timer : float = 0.0,
+	is_load: bool = false
+	) -> void:
 
 	var shader_material = level_load_transition_rect.material as ShaderMaterial
 
@@ -21,6 +26,8 @@ func _start_level_transition(
 	if not shader_material:
 		push_error("No ShaderMaterial found on ColorRect!")
 		return
+
+	$Player.velocity = Vector2(0, 0)
 
 	var camera = get_viewport().get_camera_2d()
 	if camera && "is_zoom" in camera:
@@ -36,9 +43,6 @@ func _start_level_transition(
 	var tween_in = create_tween()
 	tween_in.tween_property(shader_material, "shader_parameter/progress", 1.0, tween_speed)
 	#pause actions
-
-	$Player.velocity = vel
-
 	$Player.set_physics_process(false)
 	pause_Menu.run = false
 	camera.inputs_enabled = false
@@ -57,13 +61,27 @@ func _start_level_transition(
 	move_child(new_level, 0)
 
 	$Player.global_position = pos
-	$Player.set_character_material(density)
+	$Player.velocity = vel
 
 	var tween_out = create_tween()
 	tween_out.tween_property(shader_material, "shader_parameter/progress", 0.0, 0.5 * tween_speed)
 	await tween_out.finished
 
+	$Player.set_character_material(density)
+	$Player.set_jump_timer(jump_timer)
+	$Player.set_can_double_jump(can_double_jump)
+	$Player.set_can_downward_dash(can_downward_dash)
+	$Player.set_dash_timer(dash_timer)
+
+
 	$Player.set_physics_process(true)
+
+	$Player.set_character_material(density)
+	$Player.set_jump_timer(jump_timer)
+	$Player.set_can_double_jump(can_double_jump)
+	$Player.set_can_downward_dash(can_downward_dash)
+	$Player.set_dash_timer(dash_timer)
+
 	camera.inputs_enabled = true
 	pause_Menu.run = true
 

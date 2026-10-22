@@ -44,6 +44,17 @@ Player::~Player(){
 void Player::_bind_methods(){
     ClassDB::bind_method(D_METHOD("set_character_material", "name"), &Player::set_character_material);
     ClassDB::bind_method(D_METHOD("get_character_material"), &Player::get_character_material);
+
+
+    ClassDB::bind_method(D_METHOD("get_jump_timer"), &Player::get_jump_timer);
+    ClassDB::bind_method(D_METHOD("get_can_double_jump"), &Player::get_can_double_jump);
+    ClassDB::bind_method(D_METHOD("get_can_downward_dash"), &Player::get_can_downward_dash);
+    ClassDB::bind_method(D_METHOD("get_dash_timer"), &Player::get_dash_timer);
+
+    ClassDB::bind_method(D_METHOD("set_jump_timer", "jump_timer_set"), &Player::set_jump_timer);
+    ClassDB::bind_method(D_METHOD("set_can_double_jump", "can_double_jump_set"), &Player::set_can_double_jump);
+    ClassDB::bind_method(D_METHOD("set_can_downward_dash", "can_downward_dash_set"), &Player::set_can_downward_dash);
+    ClassDB::bind_method(D_METHOD("set_dash_timer", "dash_timer_set"), &Player::set_dash_timer);
 }
 
 void Player::_ready(){
@@ -332,9 +343,18 @@ void Player::_physics_process(double delta) {
         }
     }
     ////////////////////////////////////////////////////////////////////
+    //switch density
+    if (Input::get_singleton()->is_action_just_pressed("r")) {
+        current_density_index = (current_density_index + 1) % density_vector.size();
+    }
+    ////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
 
     //floor detection for ability activation and label alpha channel 100%
-    if (is_on_floor()) {
+    if (floor_detection_timeout) {
+        floor_detection_timeout -= delta;
+    }
+    if (is_on_floor() && floor_detection_timeout <= 0) {
         can_double_jump = true;
         can_downward_dash = true;
         Color colora = double_jump_label->get_modulate();
@@ -343,13 +363,10 @@ void Player::_physics_process(double delta) {
         Color colorb = stomp_label->get_modulate();
         colorb.a = 1.0;
         stomp_label->set_modulate(colorb);
+        floor_detection_timeout = 0.1;
     }
     ////////////////////////////////////////////////////////////////////
-    //switch density
-    if (Input::get_singleton()->is_action_just_pressed("r")) {
-        current_density_index = (current_density_index + 1) % density_vector.size();
-    }
-    ////////////////////////////////////////////////////////////////////
+
 
 
     set_velocity(velocity);
