@@ -135,6 +135,10 @@ public:
             Color color = double_jump_label->get_modulate();
             color.a = 0.5;
             double_jump_label->set_modulate(color);
+        } else {
+            Color color = double_jump_label->get_modulate();
+            color.a = 1.0;
+            double_jump_label->set_modulate(color);
         }
     }
     void set_can_double_jump(const bool &can_double_jump_set) {
@@ -142,6 +146,10 @@ public:
         if (!can_double_jump) {
             Color color = double_jump_label->get_modulate();
             color.a = 0.5;
+            double_jump_label->set_modulate(color);
+        } else {
+            Color color = double_jump_label->get_modulate();
+            color.a = 1.0;
             double_jump_label->set_modulate(color);
         }
     }
@@ -151,6 +159,10 @@ public:
             Color color = stomp_label->get_modulate();
             color.a = 0.5;
             stomp_label->set_modulate(color);
+        } else {
+            Color color = stomp_label->get_modulate();
+            color.a = 1.0;
+            stomp_label->set_modulate(color);
         }
     }
     void set_dash_timer(const double &dash_timer_set) {
@@ -158,6 +170,10 @@ public:
         if (dash_timer > 0) {
             Color color = dash_label->get_modulate();
             color.a = 0.5;
+            dash_label->set_modulate(color);
+        } else {
+            Color color = dash_label->get_modulate();
+            color.a = 1.0;
             dash_label->set_modulate(color);
         }
     }
