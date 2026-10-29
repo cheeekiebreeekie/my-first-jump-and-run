@@ -55,6 +55,8 @@ void Player::_bind_methods(){
     ClassDB::bind_method(D_METHOD("set_can_double_jump", "can_double_jump_set"), &Player::set_can_double_jump);
     ClassDB::bind_method(D_METHOD("set_can_downward_dash", "can_downward_dash_set"), &Player::set_can_downward_dash);
     ClassDB::bind_method(D_METHOD("set_dash_timer", "dash_timer_set"), &Player::set_dash_timer);
+
+    ClassDB::bind_method(D_METHOD("set_frame_skip", "frame_skip_set"), &Player::set_frame_skip);
 }
 
 void Player::_ready(){
@@ -96,11 +98,22 @@ void Player::_ready(){
 
 void Player::_physics_process(double delta) {
 
-    if (Engine::get_singleton()->is_editor_hint()) {
+    Vector2 velocity = get_velocity();
+
+    set_velocity(velocity);
+
+    if (frame_skip){
+        frame_skip_counter -= 1;
+        if (frame_skip_counter <= 0) {
+            frame_skip = false;
+        }
+        move_and_slide();
         return;
     }
 
-    Vector2 velocity = get_velocity();
+    if (Engine::get_singleton()->is_editor_hint()) {
+        return;
+    }
 
     top_z_level_area = nullptr;
 
@@ -351,7 +364,7 @@ void Player::_physics_process(double delta) {
     ////////////////////////////////////////////////////////////////////
 
     //floor detection for ability activation and label alpha channel 100%
-    if (floor_detection_timeout) {
+    if (floor_detection_timeout > 0) {
         floor_detection_timeout -= delta;
     }
     if (is_on_floor() && floor_detection_timeout <= 0) {
@@ -366,8 +379,6 @@ void Player::_physics_process(double delta) {
         floor_detection_timeout = 0.1;
     }
     ////////////////////////////////////////////////////////////////////
-
-
 
     set_velocity(velocity);
     move_and_slide();

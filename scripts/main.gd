@@ -43,7 +43,10 @@ func _start_level_transition(
 	var tween_in = create_tween()
 	tween_in.tween_property(shader_material, "shader_parameter/progress", 1.0, tween_speed)
 	#pause actions
+
+	$Player.set_frame_skip(true)
 	$Player.set_physics_process(false)
+	
 	pause_Menu.run = false
 	camera.inputs_enabled = false
 	await tween_in.finished
@@ -73,7 +76,7 @@ func _start_level_transition(
 	$Player.set_can_downward_dash(can_downward_dash)
 	$Player.set_dash_timer(dash_timer)
 
-
+	$Player.set_frame_skip(true)
 	$Player.set_physics_process(true)
 
 	$Player.set_character_material(density)

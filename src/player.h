@@ -30,6 +30,10 @@ private:
     Label *double_jump_label = nullptr;
     Label *stomp_label = nullptr;
 
+    //frame skip
+    bool frame_skip = false;
+    int frame_skip_counter = 2;
+
     //acceleration and speed variables
     double acceleration = 800.0;
     double thrust_x = 0.0;
@@ -113,6 +117,13 @@ public:
             ERR_PRINT(vformat("Unknown material: %s", name));
         }
     }
+
+    void set_frame_skip(const bool &frame_skip_set) {
+        frame_skip = frame_skip_set;
+        frame_skip_counter = 2;
+        floor_detection_timeout = 0.1;
+    }
+
     ////////////////////////////////////////////////////////////////////
     //getters for abilities + jump
     double get_jump_timer() const {

@@ -22,6 +22,7 @@ player = NodePath("..")
 copy_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D" unique_id=128411418]
+visible = false
 material = SubResource("ShaderMaterial_qhqgy")
 anchors_preset = 8
 anchor_left = 0.5
