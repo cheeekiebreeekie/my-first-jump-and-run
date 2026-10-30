@@ -46,7 +46,7 @@ func _start_level_transition(
 
 	$Player.set_frame_skip(true)
 	$Player.set_physics_process(false)
-	
+
 	pause_Menu.run = false
 	camera.inputs_enabled = false
 	await tween_in.finished
@@ -78,12 +78,6 @@ func _start_level_transition(
 
 	$Player.set_frame_skip(true)
 	$Player.set_physics_process(true)
-
-	$Player.set_character_material(density)
-	$Player.set_jump_timer(jump_timer)
-	$Player.set_can_double_jump(can_double_jump)
-	$Player.set_can_downward_dash(can_downward_dash)
-	$Player.set_dash_timer(dash_timer)
 
 	camera.inputs_enabled = true
 	pause_Menu.run = true

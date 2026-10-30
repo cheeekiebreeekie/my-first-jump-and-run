@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://d2waccsxsqtna"]
+
+[ext_resource type="Script" uid="uid://dc4rwxjedue4b" path="res://assets/menus/pause/scripts/pause_menu.gd" id="1_hfklj"]
+
+[node name="pauseMenu" type="Control" unique_id=1994078621 node_paths=PackedStringArray("children", "exitButton", "resumeButton")]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 20
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = ExtResource("1_hfklj")
+children = NodePath("MarginContainer")
+exitButton = NodePath("GridContainer/ExitButton")
+resumeButton = NodePath("GridContainer/ResumeButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1694906583]
+visible = false
+z_index = 10
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=589855611]
+visible = false
+z_index = 10
+propagate_maximum_size = false
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+alignment = 1
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1805295099]
+visible = false
+z_index = 10
+layout_mode = 2
+mouse_behavior_recursive = 2
+action_mode = 0
+keep_pressed_outside = true
+text = "Resume
+"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2093492791]
+visible = false
+propagate_maximum_size = true
+layout_mode = 2
+mouse_behavior_recursive = 2
+action_mode = 0
+text = "Exit
+"
+
+[node name="GridContainer" type="Control" parent="." unique_id=843183792]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ResumeButton" type="Button" parent="GridContainer" unique_id=31170667]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 480.0
+offset_right = 1065.0
+offset_bottom = 528.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Resume
+"
+
+[node name="SettingsButton" type="Button" parent="GridContainer" unique_id=2032258825]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 552.0
+offset_right = 1065.0
+offset_bottom = 600.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Settings
+"
+
+[node name="SaveButton" type="Button" parent="GridContainer" unique_id=1132811690]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 624.0
+offset_right = 1065.0
+offset_bottom = 672.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="GridContainer" unique_id=262895250]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 0
+offset_left = 855.0
+offset_top = 696.0
+offset_right = 1065.0
+offset_bottom = 744.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Load
+"
+
+[node name="ExitButton" type="Button" parent="GridContainer" unique_id=1645500627]
+unique_name_in_owner = true
+propagate_maximum_size = true
+layout_mode = 0
+offset_left = 855.0
+offset_top = 768.0
+offset_right = 1065.0
+offset_bottom = 816.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+text = "Exit
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="MarginContainer/VBoxContainer/Resume" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GridContainer/ResumeButton" to="GridContainer/ResumeButton" method="_on_pressed"]
+[connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_exit_pressed"]
