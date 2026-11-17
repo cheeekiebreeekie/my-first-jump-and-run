@@ -18,14 +18,13 @@ var in_controls : bool = false
 @onready var pause_Menu_position = pause_Menu.position
 
 @onready var resume: Button = %ResumeButton
-
 @onready var settings: Button = %ControlsButton
-
 @onready var save: Button = %SaveButton
-
 @onready var load_: Button = %LoadButton
-
 @onready var exit: Button = %ExitButton
+
+@onready var moveup := %MoveUp
+@onready var movedown := %MoveDown
 
 @onready var base_size: Vector2 = color_rect.size
 
@@ -121,7 +120,28 @@ func _on_load_pressed() -> void:
 	await save_manager.load_game()
 	disableUI()
 
+func keycode_helper(function: String) -> int:
+	var array := InputMap.action_get_events(function)
+	if array[0] is InputEventKey:
+		var keycode := int((array[0] as InputEventKey).physical_keycode)
+		return keycode
+	else:
+		return 0
+
+func render_helper(node:Node, keycode:int) -> void:
+	node.get_node("Button").text = OS.get_keycode_string(keycode) if keycode != 0 else "ERROR"
+
+func render_controls() -> void:
+	var moveup_keycode = keycode_helper("move_up")
+	render_helper(moveup, moveup_keycode)
+
+	var movedown_keycode = keycode_helper("move_down")
+	render_helper(movedown, movedown_keycode)
+
 func _on_controls_pressed() -> void:
+
+	render_controls();
+
 	if in_controls:
 		in_controls = false
 	else:

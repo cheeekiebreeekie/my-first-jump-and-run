@@ -145,6 +145,7 @@ void Player::_physics_process(double delta) {
     ////////////////////////////////////////////////////////////////////
     //get overlapping areas/////////////////////////////////////////////
     if (!area_detector){
+        ERR_PRINT("Missing Area Detector");
         return;
     }
     TypedArray<Area2D> areas = area_detector->get_overlapping_areas();

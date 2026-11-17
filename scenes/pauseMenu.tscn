@@ -151,6 +151,7 @@ offset_right = 3840.0
 offset_bottom = 1080.0
 
 [node name="MoveUp" type="GridContainer" parent="Control" unique_id=2056167081]
+unique_name_in_owner = true
 propagate_maximum_size = false
 layout_mode = 1
 offset_right = 210.0
@@ -167,6 +168,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="Control/MoveUp" unique_id=415635172]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="MoveDown" type="GridContainer" parent="Control" unique_id=1134697699]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 0
+offset_top = 144.0
+offset_right = 210.0
+offset_bottom = 240.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Label" type="Label" parent="Control/MoveDown" unique_id=237188035]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/MoveDown" unique_id=2119767918]
 custom_minimum_size = Vector2(210, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24

@@ -33,7 +33,7 @@ func save_game(level: String, density: String, pos: Vector2, vel: Vector2, jump_
 	}
 	var file := FileAccess.open(dir.path_join("save" + "1" + SAVE_TYPE), FileAccess.WRITE)
 	if file == null:
-		push_error("Could not open save file (ERROR %d" % FileAccess.get_open_error())
+		push_error("Could not open save file (ERROR %d)" % FileAccess.get_open_error())
 		return false
 	file.store_string(JSON.stringify(data, "\t", false, true))
 	var write_err := file.get_error()
