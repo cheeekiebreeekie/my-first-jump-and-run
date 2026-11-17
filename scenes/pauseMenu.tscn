@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://o4yo8ybq2jly"]
+[gd_scene format=3 uid="uid://d2waccsxsqtna"]
 
 [ext_resource type="Script" uid="uid://dc4rwxjedue4b" path="res://assets/menus/pause/scripts/pause_menu.gd" id="1_hfklj"]
 
@@ -66,6 +66,7 @@ text = "Exit
 "
 
 [node name="GridContainer" type="Control" parent="." unique_id=843183792]
+layout_mode = 1
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -85,7 +86,7 @@ keep_pressed_outside = true
 text = "Resume
 "
 
-[node name="SettingsButton" type="Button" parent="GridContainer" unique_id=2032258825]
+[node name="ControlsButton" type="Button" parent="GridContainer" unique_id=2032258825]
 unique_name_in_owner = true
 z_index = 10
 layout_mode = 0
@@ -97,8 +98,7 @@ mouse_behavior_recursive = 2
 theme_override_font_sizes/font_size = 24
 action_mode = 0
 keep_pressed_outside = true
-text = "Settings
-"
+text = "Controls"
 
 [node name="SaveButton" type="Button" parent="GridContainer" unique_id=1132811690]
 unique_name_in_owner = true
@@ -142,6 +142,34 @@ theme_override_font_sizes/font_size = 24
 action_mode = 0
 text = "Exit
 "
+
+[node name="Control" type="Control" parent="." unique_id=1320261160]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 1920.0
+offset_right = 3840.0
+offset_bottom = 1080.0
+
+[node name="MoveUp" type="GridContainer" parent="Control" unique_id=2056167081]
+propagate_maximum_size = false
+layout_mode = 1
+offset_right = 210.0
+offset_bottom = 96.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Label" type="Label" parent="Control/MoveUp" unique_id=997201451]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/MoveUp" unique_id=415635172]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="MarginContainer/VBoxContainer/Resume" method="_on_pressed"]

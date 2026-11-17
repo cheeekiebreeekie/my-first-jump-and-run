@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://byomery1gymne"]
+
+[node name="ControlMenu" type="Control" unique_id=791595451]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="GridContainer" type="Control" parent="." unique_id=2080900713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuButton" type="MenuButton" parent="GridContainer" unique_id=1457606417]
+layout_mode = 0
+offset_left = 924.0
+offset_top = 520.0
+offset_right = 1001.0
+offset_bottom = 551.0
+text = "Move Up"

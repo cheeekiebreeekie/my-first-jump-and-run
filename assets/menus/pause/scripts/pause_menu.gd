@@ -7,6 +7,7 @@ class_name pause_menu extends Control
 var run : bool = true;
 var ui_enabled : bool = false
 var camera
+var in_controls : bool = false
 @export var camera_scale: Vector2 = Vector2(1, 1)
 @export var default_zoom: Vector2 = Vector2(1.0, 1.0)
 
@@ -18,7 +19,7 @@ var camera
 
 @onready var resume: Button = %ResumeButton
 
-@onready var settings: Button = %SettingsButton
+@onready var settings: Button = %ControlsButton
 
 @onready var save: Button = %SaveButton
 
@@ -37,14 +38,20 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if color_rect:
 
 		camera_scale = Vector2(1, 1) / camera.zoom
 
 		pause_Menu.scale = camera_scale
 
-		pause_Menu.position = camera.global_position - (pause_Menu.size / 2) * camera_scale
+		var target_position = camera.global_position - (pause_Menu.size / 2) * camera_scale
+
+		if in_controls:
+			pause_Menu.position = pause_Menu.position.lerp(target_position - Vector2(1920, 0) * camera_scale, (1.0 - exp(-4 * delta)))
+			return
+
+		pause_Menu.position = target_position
 
 
 func _input(event):
@@ -70,6 +77,7 @@ func disableUI() -> void:
 	if (!run):
 		return
 	ui_enabled = false
+	in_controls = false
 	player.set_physics_process(true)
 	camera.set_process(true)
 	camera.inputs_enabled = true
@@ -112,3 +120,9 @@ func _on_save_pressed() -> void:
 func _on_load_pressed() -> void:
 	await save_manager.load_game()
 	disableUI()
+
+func _on_controls_pressed() -> void:
+	if in_controls:
+		in_controls = false
+	else:
+		in_controls = true
