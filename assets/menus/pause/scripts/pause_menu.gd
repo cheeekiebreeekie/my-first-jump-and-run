@@ -25,6 +25,8 @@ var in_controls : bool = false
 
 @onready var moveup := %MoveUp
 @onready var movedown := %MoveDown
+@onready var moveleft := %MoveLeft
+@onready var moveright := %MoveRight
 
 @onready var base_size: Vector2 = color_rect.size
 
@@ -132,11 +134,16 @@ func render_helper(node:Node, keycode:int) -> void:
 	node.get_node("Button").text = OS.get_keycode_string(keycode) if keycode != 0 else "ERROR"
 
 func render_controls() -> void:
-	var moveup_keycode = keycode_helper("move_up")
-	render_helper(moveup, moveup_keycode)
 
-	var movedown_keycode = keycode_helper("move_down")
-	render_helper(movedown, movedown_keycode)
+	var controls := {
+		"move_up": moveup,
+		"move_down": movedown,
+		"move_left": moveleft,
+		"move_right": moveright,
+	}
+
+	for action in controls:
+		render_helper(controls[action], keycode_helper(action))
 
 func _on_controls_pressed() -> void:
 
