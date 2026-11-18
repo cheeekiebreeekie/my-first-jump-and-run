@@ -25,6 +25,8 @@ var in_controls : bool = false
 
 @onready var base_size: Vector2 = color_rect.size
 
+var target_action : String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera = get_viewport().get_camera_2d()
@@ -60,6 +62,19 @@ func _input(event):
 		else:
 			enableUI()
 
+	if %GreyOut.visible == false:
+		return
+	elif event is InputEventKey or event is InputEventMouseButton:
+		if event.pressed:
+			if event is InputEventKey:
+				if event.keycode == KEY_ENTER:
+					return
+			InputMap.action_erase_events(target_action)
+			InputMap.action_add_event(target_action, event)
+
+			%GreyOut.visible = false
+			render_controls()
+
 
 func enableUI() -> void:
 	if (!run):
@@ -77,6 +92,9 @@ func disableUI() -> void:
 		return
 	ui_enabled = false
 	in_controls = false
+
+	%GreyOut.visible = false
+
 	player.set_physics_process(true)
 	camera.set_process(true)
 	camera.inputs_enabled = true
@@ -163,6 +181,10 @@ func render_controls() -> void:
 
 	for action in controls:
 		render_helper(controls[action], keycode_helper(action))
+	
+func _change_control(target : String) -> void:
+	%GreyOut.visible = true
+	target_action = target
 
 func _on_controls_pressed() -> void:
 

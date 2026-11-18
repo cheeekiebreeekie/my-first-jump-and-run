@@ -18,7 +18,7 @@ offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-mouse_behavior_recursive = 1
+mouse_behavior_recursive = 2
 script = ExtResource("1_hfklj")
 children = NodePath("MarginContainer")
 exitButton = NodePath("GridContainer/ExitButton")
@@ -145,12 +145,13 @@ text = "Exit
 
 [node name="Control" type="Control" parent="." unique_id=1320261160]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_left = 1920.0
 offset_right = 3840.0
 offset_bottom = 1080.0
+mouse_filter = 1
+mouse_behavior_recursive = 2
 
 [node name="MoveUp" type="GridContainer" parent="Control" unique_id=2056167081]
 unique_name_in_owner = true
@@ -160,6 +161,7 @@ offset_left = 42.0
 offset_top = 48.0
 offset_right = 252.0
 offset_bottom = 144.0
+mouse_behavior_recursive = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
@@ -175,6 +177,8 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(210, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
 
 [node name="MoveLeft" type="GridContainer" parent="Control" unique_id=1093970333]
 unique_name_in_owner = true
@@ -333,10 +337,36 @@ action_mode = 0
 keep_pressed_outside = true
 text = "Back"
 
+[node name="GreyOut" type="ColorRect" parent="Control" unique_id=235836061]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 2
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="Label" type="Label" parent="Control/GreyOut" unique_id=1213005585]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Press a Button ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="MarginContainer/VBoxContainer/Resume" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GridContainer/ResumeButton" to="GridContainer/ResumeButton" method="_on_pressed"]
 [connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/MoveUp/Button" to="." method="_change_control" binds= ["move_up"]]
+[connection signal="pressed" from="Control/MoveLeft/Button" to="." method="_change_control" binds= ["move_left"]]
+[connection signal="pressed" from="Control/MoveDown/Button" to="." method="_change_control" binds= ["move_down"]]
+[connection signal="pressed" from="Control/MoveRight/Button" to="." method="_change_control" binds= ["move_right"]]
+[connection signal="pressed" from="Control/MoveDash/Button" to="." method="_change_control" binds= ["move_dash"]]
+[connection signal="pressed" from="Control/MiddleClick/Button" to="." method="_change_control" binds= ["middle_click"]]
+[connection signal="pressed" from="Control/Density/Button" to="." method="_change_control" binds= ["r"]]
 [connection signal="pressed" from="Control/BackButton" to="." method="_on_controls_pressed"]
