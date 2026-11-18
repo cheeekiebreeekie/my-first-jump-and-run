@@ -144,6 +144,8 @@ text = "Exit
 "
 
 [node name="Control" type="Control" parent="." unique_id=1320261160]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_left = 1920.0
@@ -246,9 +248,95 @@ custom_minimum_size = Vector2(210, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
+[node name="MoveDash" type="GridContainer" parent="Control" unique_id=1050336568]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 0
+offset_left = 42.0
+offset_top = 624.0
+offset_right = 252.0
+offset_bottom = 720.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Label" type="Label" parent="Control/MoveDash" unique_id=1761952795]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dash"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/MoveDash" unique_id=849975598]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="MiddleClick" type="GridContainer" parent="Control" unique_id=1094634382]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 0
+offset_left = 42.0
+offset_top = 768.0
+offset_right = 252.0
+offset_bottom = 864.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Label" type="Label" parent="Control/MiddleClick" unique_id=1961231484]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Zoom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/MiddleClick" unique_id=101315230]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Density" type="GridContainer" parent="Control" unique_id=30129304]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 0
+offset_left = 336.0
+offset_top = 48.0
+offset_right = 546.0
+offset_bottom = 144.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Label" type="Label" parent="Control/Density" unique_id=784622435]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Density Change"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/Density" unique_id=1130754593]
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="BackButton" type="Button" parent="Control" unique_id=1240197997]
+z_index = 10
+layout_mode = 0
+offset_left = 1668.0
+offset_top = 48.0
+offset_right = 1878.0
+offset_bottom = 96.0
+mouse_behavior_recursive = 2
+theme_override_font_sizes/font_size = 24
+action_mode = 0
+keep_pressed_outside = true
+text = "Back"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="MarginContainer/VBoxContainer/Resume" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GridContainer/ResumeButton" to="GridContainer/ResumeButton" method="_on_pressed"]
 [connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/BackButton" to="." method="_on_controls_pressed"]

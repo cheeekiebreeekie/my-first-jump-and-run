@@ -23,11 +23,6 @@ var in_controls : bool = false
 @onready var load_: Button = %LoadButton
 @onready var exit: Button = %ExitButton
 
-@onready var moveup := %MoveUp
-@onready var movedown := %MoveDown
-@onready var moveleft := %MoveLeft
-@onready var moveright := %MoveRight
-
 @onready var base_size: Vector2 = color_rect.size
 
 # Called when the node enters the scene tree for the first time.
@@ -50,10 +45,13 @@ func _process(delta: float) -> void:
 
 		if in_controls:
 			pause_Menu.position = pause_Menu.position.lerp(target_position - Vector2(1920, 0) * camera_scale, (1.0 - exp(-4 * delta)))
-			return
+		else:
+			pause_Menu.position = pause_Menu.position.lerp(target_position, (1.0 - exp(-4 * delta)))
 
-		pause_Menu.position = target_position
-
+		if abs(pause_Menu.position.x) > abs(target_position.x) + 200 or in_controls:
+			%Control.visible = true
+		else:
+			%Control.visible = false
 
 func _input(event):
 	if event.is_action_pressed("pause"):
@@ -122,24 +120,45 @@ func _on_load_pressed() -> void:
 	await save_manager.load_game()
 	disableUI()
 
-func keycode_helper(function: String) -> int:
+func keycode_helper(function: String):
 	var array := InputMap.action_get_events(function)
 	if array[0] is InputEventKey:
+
 		var keycode := int((array[0] as InputEventKey).physical_keycode)
 		return keycode
+	elif array[0] is InputEventMouseButton:
+
+		#Convert from button_index to a readable string
+		match (array[0] as InputEventMouseButton).button_index:
+			MOUSE_BUTTON_LEFT: return "Left Click"
+			MOUSE_BUTTON_RIGHT: return "Right Click"
+			MOUSE_BUTTON_MIDDLE: return "Middle Click"
+			var b: return "Mouse " + str(b)
 	else:
 		return 0
 
-func render_helper(node:Node, keycode:int) -> void:
-	node.get_node("Button").text = OS.get_keycode_string(keycode) if keycode != 0 else "ERROR"
+func render_helper(node:Node, keycode) -> void:
+
+	var nodes_node = node.get_node("Button")
+
+	if keycode is int:
+		nodes_node.text = OS.get_keycode_string(keycode) if keycode != 0 else "ERROR"
+	elif keycode is String:
+		nodes_node.text = keycode if keycode != "" else "ERROR"
+	else:
+		return
+
 
 func render_controls() -> void:
 
 	var controls := {
-		"move_up": moveup,
-		"move_down": movedown,
-		"move_left": moveleft,
-		"move_right": moveright,
+		"move_up": %MoveUp,
+		"move_down": %MoveDown,
+		"move_left": %MoveLeft,
+		"move_right": %MoveRight,
+		"move_dash": %MoveDash,
+		"middle_click": %MiddleClick,
+		"r": %Density,
 	}
 
 	for action in controls:
