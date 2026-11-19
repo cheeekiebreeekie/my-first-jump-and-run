@@ -1,0 +1,16 @@
+{
+	"level": "res://scenes/level_2.tscn",
+	"density": "oak",
+	"position": {
+		"x": 7685.23681640625,
+		"y": -1457.0408935546875
+	},
+	"velocity": {
+		"x": 2285.93359375,
+		"y": -566.1555786132813
+	},
+	"jump_timer": -0.016666666666666562,
+	"can_double_jump": false,
+	"can_downward_dash": true,
+	"dash_timer": 1.8166666666666673
+}
