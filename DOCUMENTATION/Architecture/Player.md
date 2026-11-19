@@ -41,3 +41,5 @@ The `velocity` property is inherited from `CharacterBody2D. `main.gd` sets it di
 The setters also change the alpha of the matching HUD label, so the label dims while the ability is unavailable. `set_jump_timer()` changes the alpha of the double-jump label, since there is no seperate jump label.
 
 ## Frame skip
+
+`set_frame_skip
