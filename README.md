@@ -34,14 +34,14 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
 > **Note for Linux Users:** If launching fails with a window error, ensure a supported terminal emulator (like `alacritty` or `xterm`) is installed. The launcher uses it to initialize console output.
 
 ## Controls
-| Action | Input (Keyboard) | Notes
+| &nbsp;Action | &nbsp;Input (Keyboard) | &nbsp;Notes
 | :--- | :--- | :--- |
-| **Move Left / Right** | `A` / `D` | Dynamic acceleration & friction |
-| **Jump** | `W` | Grounded jump |
-| **Double Jump** | `W` (in air) | Resets upon touching the floor | 
-| **Stomp** | `S` (in air) | Rapid downward force |
-| **Horizontal Dash** | `Shift` | Cooldown indicated in HUD |
-| **Cycle Player Density** | `R` | Swaps player density |
+| &nbsp;**Move Left / Right** | &nbsp;`A` / `D` | &nbsp;Dynamic acceleration & friction |
+| &nbsp;**Jump** | &nbsp;`W` | &nbsp;Grounded jump |
+| &nbsp;**Double Jump** | &nbsp;`W` (in air) | &nbsp;Resets upon touching the floor | 
+| &nbsp;**Stomp** | &nbsp;`S` (in air) | &nbsp;Rapid downward force |
+| &nbsp;**Horizontal Dash** | &nbsp;`Shift` | &nbsp;Cooldown indicated in HUD |
+| &nbsp;**Cycle Player Density** | &nbsp;`R` | &nbsp;Swaps player density |
 ## License
 
 * Slightly changed **PolyForm Noncommercial License 1.0.0** ([LICENSE](https://github.com/cheeekiebreeekie/my-first-jump-and-run/blob/Dev/LICENSE.md))
