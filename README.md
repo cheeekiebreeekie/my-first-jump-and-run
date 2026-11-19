@@ -13,7 +13,7 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
 ## Tech Stack
 
 * **Engine:** Godot 4.X
-* **Language:** GDScript, C++20
+* **Language:** GDScript, GDShader, C++20, Python
 
 ## System Requirements
 
@@ -24,7 +24,7 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
 
 1. **Download & Extract:** Download `jumpandrun.windows.zip` or `jumpandrun.linux.tar` from the latest GitHub release and extract it to your desired folder
 >[!Warning]
->**Do not extract or install into a write-protected directory** (such as `/usr/bin`, `C:\Program Files`, or standard read-only mount points). 
+>**Do not extract or install into a write-protected directory** (such as `/usr/bin`, `C:\Program Files`, or standard read-only mount points).  
 >The application needs write access to its working directory.
 2. **Keep Folder Structure Intact:** Do not move or rename files inside the extracted directory (the launcher expects `bin/` to be next to it)
 3. **Launch:**
@@ -32,6 +32,7 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
     * **Windows:** Double-click `launcher.exe`
 
 > **Note for Linux Users:** If launching fails with a window error, ensure a supported terminal emulator (like `alacritty` or `xterm`) is installed. The launcher uses it to initialize console output.
+> Also see: [Documentation](DOCUMENTATION/My_First_Jump_And_Run.md)
 
 ## Controls
 | &nbsp;Action | &nbsp;Input (Keyboard) | &nbsp;Notes
