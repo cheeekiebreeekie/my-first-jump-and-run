@@ -31,9 +31,7 @@ Buoyancy, Friction, etc. using real world formulas, well performing by using C++
     * **Linux:** Double-click `launcher` or execute `./launcher` from a terminal in the games directory.
     * **Windows:** Double-click `launcher.exe`
 
-> **Note for Linux Users:** If launching fails with a window error, ensure a supported terminal emulator (like `alacritty` or `xterm`) is installed. The launcher uses it to initialize console output.
->
-> Also see: [Documentation](DOCUMENTATION/My_First_Jump_And_Run.md)
+> **Note for Linux Users:** If launching fails with a window error, ensure a supported terminal emulator (like `alacritty` or `xterm`) is installed. The launcher uses it to initialize console output. <br> Also see: [Documentation](DOCUMENTATION/My_First_Jump_And_Run.md)
 
 ## Controls
 | &nbsp;Action | &nbsp;Input (Keyboard) | &nbsp;Notes
