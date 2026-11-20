@@ -5,6 +5,15 @@ Developer documentation for *My First Jump And Run*, a 2D platformer built in Go
 > [!NOTE]
 > This page covers development. For the player-facing description and controls, see the [README](../README.md)
 
+## Related articles
+
+- [Building](Building/Building.md)
+- [Architecture](Architecture/Architecture.md)
+- [Player](Architecture/Player.md)
+-
+
+- [Troubleshooting](Troubleshooting/Troubleshooting.md)
+
 ## Requirements
 
 - Godot 4.2 or newer (`compatability_minimum` in `addons/cpp/example.gdextension`; the project itself is set up for 4.7)
