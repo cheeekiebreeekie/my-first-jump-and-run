@@ -13,7 +13,7 @@ This page describes the `Player` class: the header `src/player.h`, the implement
 
 ## Class overview
 
-`Player` extends `CharacterBody2D`. Its class is registered at scene initialization in `src/register_types.cpp`. The physics runs in `_physics_process()`. Abilities, material, frame skip are exposed to GDScript through `_bind_methods()`.
+`Player` extends `CharacterBody2D`. Its class is registered at scene initialization in `src/register_types.cpp`. The physics runs in `_physics_process()`. Abilities, material, and frame skip are exposed to GDScript through `_bind_methods()`.
 
 ## Scene requirements
 
@@ -97,7 +97,7 @@ gravity_force = character_mass * g
 
 The fluid is the overlapping `Area2D` with the highest `z_index`. Any overlapping `Area2D` counts, not only water areas, so an unrelated area above a fluid will take over. The fluid must define `density` and `viscocity` script properties. The spelling matches the source. With no fluid, density and viscosity are both 0.
 
-Submersion is the fraction of the player's height below the fluid's top edge. The top edge comes from the fluid's 'CollisionShape2D* , and that shape must be a `RectangleShape2D`. Otherwise the submersion is 0, even though the fluid's density and viscosity still apply.
+Submersion is the fraction of the player's height below the fluid's top edge. The top edge comes from the fluid's `CollisionShape2D` , and that shape must be a `RectangleShape2D`. Otherwise the submersion is 0, even though the fluid's density and viscosity still apply.
 
 ```
 character_bottom = global_y + h * 0.5
@@ -156,7 +156,7 @@ The slamming force cap is divided by delta to avoid overshoots.
 
 ### Horizontal thrust and friction
 
-The input direction is `get_axis("move_left", "move_righ")`, a value from -1 to 1. Thrust is capped by the stall force, so it weakens as speed increases:
+The input direction is `get_axis("move_left", "move_right")`, a value from -1 to 1. Thrust is capped by the stall force, so it weakens as speed increases:
 
 ```
 stall  = 800 * effective_mass
