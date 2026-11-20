@@ -8,7 +8,7 @@ This page describes the `Player` class: the header `src/player.h`, the implement
 
 | &nbsp;File | &nbsp;Contents |
 | :--- | :--- |
-| &nbsp;`src/player.h` | &nbsp;Class declaration, memeber variables, inline getters and setters, tunable values |
+| &nbsp;`src/player.h` | &nbsp;Class declaration, member variables, inline getters and setters, tunable values |
 | &nbsp;`src/player.cpp` | &nbsp;`_bind_methods()`, `_ready()`, and `_physics_process()` |
 
 ## Class overview
@@ -20,12 +20,8 @@ This page describes the `Player` class: the header `src/player.h`, the implement
 `_ready()` looks up these children. Missing nodes produce an error from `_get_Node()`:
 
 - `Sprite2D`: its texture supplies the width and height. These are read once.
-- `Area2D`: used for fluid detection. Without it, `physics_process()` prints `"Missing Area Detector"` and returns before `move_and_slide()`, so the player does not move.
+- `Area2D`: used for fluid detection. Without it, `_physics_process()` prints `"Missing Area Detector"` and returns before `move_and_slide()`, so the player does not move.
 - `Camera2D/VelocityLabelX`, `Camera2D/VelocityLabelY`, `Camera2D/MediumLabel`, `Camera2D/CurrentDensityLabel`, `Camera2D/GravityForceLabel`, `Camera2D/BuoyancyLabel`, `Camera2D/DashLabel`, `Camera2D/DoubleJumpLabel`, `Camera2D/StompLabel`: the HUD labels. They are used without null checks.
-
-As well as the following:
-- Calculates `character_mass` based on `character_size`(1.0 in `player.h`) * `get_character_density()` to set an initial mass
-- Imports settings and copies its gravity into `surface_gravity` 
 
 ## GDScript interface
 
@@ -42,7 +38,7 @@ These methods are bound with `ClassDB::bind_method()`:
 
 The `velocity` property is inherited from `CharacterBody2D. `main.gd` sets it directly. `get_character_density()`is C++ only and is not bound.
 
-The setters also change the alpha of the matching HUD label, so the label dims while the ability is unavailable. `set_jump_timer()` changes the alpha of the double-jump label, since there is no seperate jump label.
+The setters also change the alpha of the matching HUD label, so the label dims while the ability is unavailable. `set_jump_timer()` changes the alpha of the double-jump label, since there is no separate jump label.
 
 ## Frame skip
 
@@ -70,7 +66,7 @@ The setters also change the alpha of the matching HUD label, so the label dims w
 
 ### Gravity
 
-The core sits at `planet_radius` below the origin. Godot's y axis points down so `planet_radius` must be a positive double.
+The core sits at `planet_radius` below the origin. Godot's y axis points down.
 
 ```
  r = planet_radius - global_y            (r = 0 is replaced with 0.001 to avoid +/- inf result)
@@ -79,7 +75,7 @@ The core sits at `planet_radius` below the origin. Godot's y axis points down so
 |r| >= R: g = g0 * (R^2 / |r|^2) * sign(r)
 ```
 
-`g0` is `physics/2d/default_gravity` from the project settings, readin `_ready()` (981 px/s²). `R` is `planet_radius` (10000 px). Below the core, `r` is negative, so gravity points upward. This is the core inversion described in README.
+`g0` is `physics/2d/default_gravity` from the project settings, reading `_ready()` (981 px/s²). `R` is `planet_radius` (10000 px). Below the core, `r` is negative, so gravity points upward. This is the core inversion described in README.
 
 ### Mass and density
 
@@ -114,7 +110,7 @@ rho = rho_air * exp(y / 850000)
 
 ```
 submerged_size = character_size * submersion
-displaced_mass = rho * submered_size
+displaced_mass = rho * submerged_size
 effective_mass = character_mass + 0.8 * displaced_mass
 buoyancy       = rho * submerged_size * g
 ```
@@ -137,7 +133,7 @@ S standing for `submersion_percent`
 
 ### Damping and slamming
 
-Damping only applies when the player is submerged. The damping ration is 0.2.
+Damping only applies when the player is submerged. The damping ratio is 0.2.
 
 ```
 k          = rho * w^2 * |g|
@@ -167,9 +163,9 @@ When the input opposes the current horizontal velocity, the thrust is multiplied
 
 Friction only applies while on the floor. The coefficient is read from the `friction` property of the floor collider. Off the floor, the coefficient is set to 0.
 
-´´´
+```
 friction = sign(v.x) * coefficient * (gravity_force - buoyancy)
-´´´
+```
 
 Friction is multiplied by 4 when `|v.x|` exceeds `(effective_mass * g - drag.x) / effective_mass`. On the floor, with no input and `|v.x| < 10`, `v.x` is set to 0 so the player stops.
 
@@ -193,8 +189,8 @@ Every frame, the labels show the horizontal and vertical velocity, the medium's 
 | :--- | :--- | :--- | :--- |
 | &nbsp;Jump | &nbsp;`move_up` (held) | &nbsp;`v.y += jump_speed` (-500) | &nbsp;On the floor. Sets a 0.5s lock. |
 | &nbsp;Double jump | &nbsp;`move_up` (just pressed) | `v.y += 1.1 * jump_speed` | &nbsp;Once per airtime. |
-| &nbsp;Stomp | &nbsp;`move_down` (just pressed) | &nbsp;If `v.y < 0`, sets `v.y = 0`. Thne adds 1000 to `v.y`. | Once per airtime. |
-| &nbsp;Horizontal dash | &nbsp;`move_dash` (just pressed) | &nbsp;`v.x += 600` in the input direction, or in the direction of travle if `\|v.x\|` >= 5` | &nbsp;2s cooldown. Starts even if nothing happens. |
+| &nbsp;Stomp | &nbsp;`move_down` (just pressed) | &nbsp;If `v.y < 0`, sets `v.y = 0`. Then adds 1000 to `v.y`. | Once per airtime. |
+| &nbsp;Horizontal dash | &nbsp;`move_dash` (just pressed) | &nbsp;`v.x += 600` in the input direction, or in the direction of travel if `\|v.x\|` >= 5` | &nbsp;2s cooldown. Starts even if nothing happens. |
 | &nbsp;Density cycle | &nbsp;`r` (just pressed) | &nbsp;Next material: oak, concrete, aerogel, then oak | None |
 
 Holding `move_up`on the floor jumps again each time the 0.5s lock expires. At standard gravity the lock expires before the player touches the ground again.
@@ -227,7 +223,7 @@ Some values are set in `_physics_process()` rather than in the header: the 0.5s 
 - `vertical_sprite_width` holds the textures height.
 - The `friction` multiplier on reversed input changes `friction_coefficient` itself. If the floor collider has a `friction` property, the value is reloaded every floor frame, so it does not accumulate. If the collider has no such property, the coefficient keeps its previous value, and holding reversed input multiplies it again each frame.
 - In `player.cpp`, the `Densities` namespace defines `WATER`, `AIR_VISCOSITY`, `WATER_VISCOSITY`, and `GRASS_FRICTION`, but the physics code does not use them.
-- `set_jump_timer()` dims the double-jump label, sincer there is no jump label
+- `set_jump_timer()` dims the double-jump label, since there is no jump label
 
 ## See also
 

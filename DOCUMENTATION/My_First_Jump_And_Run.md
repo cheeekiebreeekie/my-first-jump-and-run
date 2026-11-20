@@ -9,14 +9,13 @@ Developer documentation for *My First Jump And Run*, a 2D platformer built in Go
 
 - [Building](Building/Building.md)
 - [Architecture](Architecture/Architecture.md)
-- [Player](Architecture/Player.md)
 -
 
 - [Troubleshooting](Troubleshooting/Troubleshooting.md)
 
 ## Requirements
 
-- Godot 4.2 or newer (`compatability_minimum` in `addons/cpp/example.gdextension`; the project itself is set up for 4.7)
+- Godot 4.2 or newer (`compatibility_minimum` in `addons/cpp/example.gdextension`; the project itself is set up for 4.7)
 - godot-cpp, included as a git submodule
 - SCons, gcc-13 / g++-13, and a MinGW-w64 toolchain for the Windows Launcher
 
@@ -39,4 +38,4 @@ Then open `project.godot` in the Godot editor. See [Building](Building/Building.
 | &nbsp;`scripts/` | &nbsp;GDScript, including `save_manager.gd` |
 | &nbsp;`assets/` | &nbsp;Sprites, textures and `pause_Menu.gd` template |
 | &nbsp;`changelogs/` | &nbsp;Per-version changelogs and the template |
-| &nbsp;`jumpandrun.xxx/` | &nbsp;Release folders with the launcher and README |
+| &nbsp;`jumpandrun.*/` | &nbsp;Release folders with the launcher and README |

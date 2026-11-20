@@ -1,5 +1,5 @@
 [Main Page](../My_First_Jump_And_Run.md)
-#Troubleshooting
+# Troubleshooting
 
 This page lists common problems when building or running the project, and how to fix them. For build steps, see [Building](../Building/Building.md).
 

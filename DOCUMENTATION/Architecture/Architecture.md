@@ -28,3 +28,11 @@ Level changes are handled in the `scripts/main.gd`. The screen fades out, the ne
 ## Player interface
 
 `Player` exposes its state to GDScript through bound methods, such as the ability timers and the current material. The full list is on the [Player](Player.md) page.
+
+### See also:
+
+- [Building](../Building/Building.md)
+- [Troubleshooting](../Troubleshooting/Troubleshooting.md)
+- [Player](Player.md)
+- [Main.gd](Main_gd.md)
+- [Save System](Save_System.md)
